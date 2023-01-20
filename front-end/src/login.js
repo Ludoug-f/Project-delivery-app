@@ -51,24 +51,25 @@ export default function login() {
         type="button"
         name="Entrar"
         disabled={ buttonDisabled }
+        // onClick={}
         data-testid="commom_login__botton-login"
       >
         Entrar
       </button>
 
 
-      <button
+      <link href="/register"><button
         type="button"
         name="Registre-se"
         data-testid="commom_login__botton-register"
       >
         Registre-se
-      </button>
+      </button></link>
 
       { erroMsg ? <p 
           data-testid="commom_login__element-invalid-email"
         >
-          Mensagem de erro
+          Email ou Senha invalidos.
         </p> : null }
     </div>
   );
