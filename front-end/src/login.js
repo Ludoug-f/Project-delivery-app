@@ -6,6 +6,7 @@ export default function login() {
   const [loginType, setLoginType] = useState('');
   const [passType, setPassType] = useState('');
   const [buttonDisabled, setButtonDisabled] = useState(true);
+  const [erroMsg, setErroMsg] = useState(false);
   const SIX = 6;
 
   const validateEmail = (userEmail) => {
@@ -35,7 +36,7 @@ export default function login() {
         name="login"
         value={ loginType }
         onChange={ (elem) => setLoginType(elem.target.value) }
-        // colocar data-testid
+        data-testid="commom_login__input-email"
       />
 
       <p>Password:</p> <imput
@@ -43,13 +44,14 @@ export default function login() {
         name="password"
         value={ passType }
         onChange={ (elem) => setPassType(elem.target.value) }
-        // colocar data-testid
+        data-testid="commom_login__input-password"
       />
 
       <button
         type="button"
         name="Entrar"
         disabled={ buttonDisabled }
+        data-testid="commom_login__botton-login"
       >
         Entrar
       </button>
@@ -58,9 +60,16 @@ export default function login() {
       <button
         type="button"
         name="Registre-se"
+        data-testid="commom_login__botton-register"
       >
         Registre-se
       </button>
+
+      { erroMsg ? <p 
+          data-testid="commom_login__element-invalid-email"
+        >
+          Mensagem de erro
+        </p> : null }
     </div>
   );
 };
