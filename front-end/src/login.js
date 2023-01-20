@@ -17,10 +17,10 @@ export default function login() {
   useEffect(() => {
     const validateLogin = () => {
       if (validateEmail(loginType) && passType.length > SIX) {
-        setDisabledButton(false);
+        setButtonDisabled(false);
         return;
       }
-      setDisabledButton(true);
+      setButtonDisabled(true);
     };
     validateLogin();
   });
