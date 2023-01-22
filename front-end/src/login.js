@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 // import { Redirect } from 'react-router-dom';
 // import PropTypes from 'prop-types';
 
-export default function login() {
+export default function Login() {
   const [loginType, setLoginType] = useState('');
   const [passType, setPassType] = useState('');
   const [buttonDisabled, setButtonDisabled] = useState(true);
@@ -26,12 +26,11 @@ export default function login() {
   });
 
   return (
-    <div
-      // display="flex"
-    >
+    <div>
       <h1>Seja Bem vindo!</h1>
-      
-      <p>Login:</p> <input
+
+      <p>Login:</p>
+      <input
         type="text"
         name="login"
         value={ loginType }
@@ -39,7 +38,8 @@ export default function login() {
         data-testid="commom_login__input-email"
       />
 
-      <p>Password:</p> <imput
+      <p>Password:</p>
+      <imput
         type="password"
         name="password"
         value={ passType }
@@ -57,14 +57,14 @@ export default function login() {
         Entrar
       </button>
 
-
-      <link href="/register"><button
+      <button
         type="button"
         name="Registre-se"
         data-testid="commom_login__botton-register"
+        link="/register"
       >
         Registre-se
-      </button></link>
+      </button>
 
       { erroMsg ? <p 
           data-testid="commom_login__element-invalid-email"
@@ -74,3 +74,4 @@ export default function login() {
     </div>
   );
 };
+// <link href="/register"></link>
