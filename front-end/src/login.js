@@ -67,10 +67,10 @@ export default function Login() {
       </button>
 
       { erroMsg ? <p 
-          data-testid="commom_login__element-invalid-email"
-        >
-          Email ou Senha invalidos.
-        </p> : null }
+        data-testid="commom_login__element-invalid-email"
+      >
+        Email ou Senha invalidos.
+      </p> : null }
     </div>
   );
 };
