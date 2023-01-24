@@ -21,20 +21,20 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route
-          path='/'
-          element={ <Redirect to='/login' /> }
+          path="/"
+          element={ <Redirect to="/login" /> }
         />
         <Route
-          path='/login'
+          path="/login"
           element={ <Login /> }
         />
         <Route
-          path='/register'
+          path="/register"
           element={ <Register /> }
         />
       </Routes>
     </BrowserRouter>
-  )
+  );
 }
 
 export default App;
