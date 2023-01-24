@@ -15,14 +15,14 @@ export default function Login() {
   };
 
   useEffect(() => {
-    const validateLogin = () => {
+    const validateRegister = () => {
       if (validateEmail(loginType) && passType.length > SIX) {
         setButtonDisabled(false);
         return;
       }
       setButtonDisabled(true);
     };
-    validateLogin();
+    validateRegister();
   });
 
   return (
