@@ -3,10 +3,12 @@ import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
 import App from './App';
+// import { Redirect } from 'react-router-dom';
 
 ReactDOM.render(
   <React.StrictMode>
     <App />
+    {/* <Route path='/' element={ <Redirect to="/login" /> }/> */}
   </React.StrictMode>,
   document.getElementById('root'),
 );
