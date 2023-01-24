@@ -10,4 +10,3 @@ app.get('/coffee', (_req, res) => res.status(418).end());
 app.use('/login', (req, res) => ctrlLogin.Login(req, res));
 
 module.exports = app;
-
