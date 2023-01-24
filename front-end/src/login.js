@@ -66,12 +66,13 @@ export default function Login() {
         Registre-se
       </button>
 
-      {/* { erroMsg ? <p 
+      {/* { erroMsg ? <p
         data-testid="commom_login__element-invalid-email"
       >
         Email ou Senha invalidos.
       </p> : null } */}
     </div>
   );
-};
+}
+
 // <link href="/register"></link>

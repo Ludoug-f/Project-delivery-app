@@ -1,5 +1,8 @@
 // import
 
+const SIX = 6;
+const Twelve = 12;
+
 export default function Register() {
   const [nameType, setNameType] = useState('');
   const [emailTypeR, setEmailTypeR] = useState('');
@@ -14,8 +17,8 @@ export default function Register() {
   useEffect(() => {
     const validateLogin = () => {
       if (validateEmail(emailTypeR)
-      && passRegister.length > 6
-      && nameType.length > 12) {
+      && passRegister.length > SIX
+      && nameType.length > Twelve) {
         setButtonDisabled(false);
         return;
       }
@@ -63,12 +66,13 @@ export default function Register() {
         Entrar
       </button>
 
-      {/* { erroMsg ? <p 
+      {/* { erroMsg ? <p
         data-testid="commom_register__element-invalid-register"
       >
         Email ou Senha invalidos.
       </p> : null } */}
     </div>
   );
-};
+}
+
 // Fim
