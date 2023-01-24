@@ -1,18 +1,18 @@
 module.exports = (sequelize, DataTypes) => {
-    const Product = sequelize.define('Product', {
-      id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-      },
-      name: DataTypes.STRING,
-      price: DataTypes.DECIMAL(4,2),
-      urlImage: DataTypes.STRING,
-    }, {
-      timestamps: false,
-      tableName: 'products',
-      underscored: true,
-    });
-  
-    return Product;
-  };
+  const Product = sequelize.define('Product', {
+    id: {
+      primaryKey: true,
+      type: DataTypes.INTEGER,
+    },
+    name: DataTypes.STRING,
+    price: DataTypes.DECIMAL,
+    url_image: DataTypes.STRING,
+  },
+  {
+    timestamps: false,
+    underscored: true,
+    tableName: 'products'
+  });
+
+  return Product;
+};
