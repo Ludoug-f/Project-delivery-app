@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 // import rockGlass from './images/rockGlass.svg';
-import { BrowserRouter, Routes, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter, Route, Redirect } from 'react-router-dom'; // BrowserRouter, Routes, 
 // import { Redirect } from 'react-router-dom';
 import Login from './login';
 import Register from './register';
@@ -19,20 +19,18 @@ function App() {
   // return <Route path='/' element={ <Redirect to='/login' /> }/>;
   return (
     <BrowserRouter>
-      <Routes>
-        <Route
-          path="/"
-          element={ <Redirect to="/login" /> }
-        />
-        <Route
-          path="/login"
-          element={ <Login /> }
-        />
-        <Route
-          path="/register"
-          element={ <Register /> }
-        />
-      </Routes>
+      <Route
+        path="/"
+        element={ <Redirect to="/login" /> }
+      />
+      <Route
+        path="/login"
+        element={ <Login /> }
+      />
+      <Route
+        path="/register"
+        element={ <Register /> }
+      />
     </BrowserRouter>
   );
 }
