@@ -1,7 +1,7 @@
 // import
 
 const SIX = 6;
-const Twelve = 12;
+const TWELVE = 12;
 
 export default function Register() {
   const [nameType, setNameType] = useState('');
@@ -9,8 +9,6 @@ export default function Register() {
   const [passRegister, setPassRegister] = useState('');
   const [buttonDisabled, setButtonDisabled] = useState(true);
   // const [erroMsg, setErroMsg] = useState(false);
-  const SIX = 6;
-  const TWELVE = 12;
 
   const validateEmail = (userEmail) => {
     const checkEmail = /\S+@\S+\.\S+/;
