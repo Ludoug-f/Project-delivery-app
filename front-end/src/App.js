@@ -4,16 +4,16 @@ import './App.css';
 import { Redirect } from 'react-router-dom';
 
 function App() {
-  // return (
-  //   <div className="App">
-  //     <span className="logo">TRYBE</span>
-  //     <object className="rocksGlass" type="image/svg+xml" data={ rockGlass }>
-  //       Glass
-  //     </object>
-  //     <Route path='/' element={ <Redirect to="/login" /> }/>
-  //   </div>
-  // );
-  return <Route path='/' element={ <Redirect to="/login" /> }/>;
+  return (
+    <div className="App">
+      <span className="logo">TRYBE</span>
+      <object className="rocksGlass" type="image/svg+xml" data={ rockGlass }>
+        Glass
+      </object>
+      <Route path='/' element={ <Redirect to="/login" /> }/>
+    </div>
+  );
+  // return <Route path='/' element={ <Redirect to="/login" /> }/>;
 }
 
 export default App;
