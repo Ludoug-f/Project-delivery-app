@@ -1,5 +1,8 @@
 // import
 
+const SIX = 6;
+const Twelve = 12;
+
 export default function Register() {
   const [nameType, setNameType] = useState('');
   const [emailTypeR, setEmailTypeR] = useState('');
