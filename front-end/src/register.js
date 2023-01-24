@@ -5,7 +5,7 @@ export default function Register() {
   const [emailTypeR, setEmailTypeR] = useState('');
   const [passRegister, setPassRegister] = useState('');
   const [buttonDisabled, setButtonDisabled] = useState(true);
-  const [erroMsg, setErroMsg] = useState(false);
+  // const [erroMsg, setErroMsg] = useState(false);
 
   const validateEmail = (userEmail) => {
     const checkEmail = /\S+@\S+\.\S+/;
@@ -63,11 +63,11 @@ export default function Register() {
         Entrar
       </button>
 
-      { erroMsg ? <p 
+      {/* { erroMsg ? <p 
         data-testid="commom_register__element-invalid-register"
       >
         Email ou Senha invalidos.
-      </p> : null }
+      </p> : null } */}
     </div>
   );
 };
