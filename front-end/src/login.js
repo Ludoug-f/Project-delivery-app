@@ -6,7 +6,7 @@ export default function Login() {
   const [loginType, setLoginType] = useState('');
   const [passType, setPassType] = useState('');
   const [buttonDisabled, setButtonDisabled] = useState(true);
-  const [erroMsg, setErroMsg] = useState(false);
+  // const [erroMsg, setErroMsg] = useState(false);
   const SIX = 6;
 
   const validateEmail = (userEmail) => {
@@ -66,12 +66,13 @@ export default function Login() {
         Registre-se
       </button>
 
-      { erroMsg ? <p 
+      {/* { erroMsg ?
+      <p
         data-testid="commom_login__element-invalid-email"
       >
         Email ou Senha invalidos.
-      </p> : null }
+      </p> : null } */}
     </div>
   );
-};
+}
 // <link href="/register"></link>
