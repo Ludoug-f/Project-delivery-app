@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import APIs from '../ultils/APIs';
 
 export default function Login() {
   const history = useHistory();
@@ -91,6 +92,13 @@ export default function Login() {
           )
           : '' }
       </form>
+      { erroMsg
+        ? (
+          <div data-testid="common_login__element-invalid-email">
+            Email ou Senha invalidos.
+          </div>
+        )
+        : '' }
     </div>
   );
 }
