@@ -90,12 +90,12 @@ export default function Login() {
       </form>
       {
         erroMsg
-      ?
-        <p data-testid="commom_register__element-invalid-register">
-          Email ou Senha invalidos.
-        </p>
-      :
-        null
+          ?
+          <p data-testid="commom_register__element-invalid-register">
+            Email ou Senha invalidos.
+          </p>
+          :
+          null
       }
     </div>
   );
