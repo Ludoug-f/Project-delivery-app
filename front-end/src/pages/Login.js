@@ -88,15 +88,13 @@ export default function Login() {
           Email ou Senha invalidos.
         </p>
       </form>
-      {
-        erroMsg
-          ?
-            <p data-testid="commom_register__element-invalid-register">
+      { erroMsg
+          ? (
+            <div data-testid="common_login__element-invalid-email">
               Email ou Senha invalidos.
-            </p>
-          :
-          null
-      }
+            </div>
+          )
+          : '' }
     </div>
   );
 }
