@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import APIs from '../ultils/APIs';
-// import { Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 // import PropTypes from 'prop-types';
 
 export default function Login() {
+  const history = useHistory();
   const [loginType, setLoginType] = useState('');
   const [passType, setPassType] = useState('');
   const [buttonDisabled, setButtonDisabled] = useState(true);
