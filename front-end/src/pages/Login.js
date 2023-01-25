@@ -31,9 +31,9 @@ export default function Login() {
     const result = await APIs.LoginAPI('/login', 'POST', data);
     const { role } = result;
     if (role === 'costume') return history.push('/costmer/products');
-    if (role === 'seller') return history;push('/seller/orders');
-    if (role === 'admin') return history;push('/admin/manage');
-    if (response.message === 'Not found') setErroMsg = true;
+    if (role === 'seller') return history.push('/seller/orders');
+    if (role === 'admin') return history.push('/admin/manage');
+    if (response.message === 'Not found') setErroMsg(true);
     return null;
   };
 
@@ -70,7 +70,7 @@ export default function Login() {
           type="submit"
           disabled={ buttonDisabled }
           data-testid="common_login__button-login"
-          onClick={loginClick()}
+          onClick={ loginClick() }
         >
           LOGIN
         </button>
@@ -88,9 +88,7 @@ export default function Login() {
           Email ou Senha invalidos.
         </p>
       </form>
-      { erroMsg ? <p
-        data-testid="commom_register__element-invalid-register"
-      >
+      { erroMsg ? <p data-testid="commom_register__element-invalid-register">
         Email ou Senha invalidos.
       </p> : null }
     </div>
