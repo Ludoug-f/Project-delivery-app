@@ -30,7 +30,7 @@ export default function Register() {
 
   return (
     <div>
-      <form>
+      <form className="Form">
         <p>Nome</p>
         <label htmlFor="Nome">
           <input
