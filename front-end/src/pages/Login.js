@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import APIs from '../ultils/APIs';
 import { useHistory } from 'react-router-dom';
+import APIs from '../ultils/APIs';
 // import PropTypes from 'prop-types';
 
 export default function Login() {
@@ -88,9 +88,15 @@ export default function Login() {
           Email ou Senha invalidos.
         </p>
       </form>
-      { erroMsg ? <p data-testid="commom_register__element-invalid-register">
-        Email ou Senha invalidos.
-      </p> : null }
+      {
+        erroMsg
+      ?
+        <p data-testid="commom_register__element-invalid-register">
+          Email ou Senha invalidos.
+        </p>
+      :
+        null
+      }
     </div>
   );
 }

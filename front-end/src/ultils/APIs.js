@@ -6,3 +6,8 @@ export default async function LoginAPI(path, method, payload) {
   }).then((req) => req.json());
   return response;
 }
+
+// export async function RegisterAPI() {
+//   const response = 'oi';
+//   return response;
+// }
