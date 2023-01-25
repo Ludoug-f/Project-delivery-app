@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import APIs from '../ultils/APIs';
 // import { Redirect } from 'react-router-dom';
 // import PropTypes from 'prop-types';
 
@@ -6,7 +7,7 @@ export default function Login() {
   const [loginType, setLoginType] = useState('');
   const [passType, setPassType] = useState('');
   const [buttonDisabled, setButtonDisabled] = useState(true);
-  // const [erroMsg, setErroMsg] = useState(false);
+  const [erroMsg, setErroMsg] = useState(false);
   const SIX = 6;
 
   const validateEmail = (userEmail) => {
@@ -24,6 +25,16 @@ export default function Login() {
     };
     validateLogin();
   });
+
+  const loginClick = async (data) => {
+    const result = await APIs.LoginAPI('/login', 'POST', data);
+    const { role } = result;
+    if (role === 'costume') return history.push('/costmer/products');
+    if (role === 'seller') return history;push('/seller/orders');
+    if (role === 'admin') return history;push('/admin/manage');
+    if (response.message === 'Not found') setErroMsg = true;
+    return null;
+  };
 
   return (
     <div>
@@ -58,6 +69,7 @@ export default function Login() {
           type="submit"
           disabled={ buttonDisabled }
           data-testid="common_login__button-login"
+          onClick={loginClick()}
         >
           LOGIN
         </button>
@@ -75,7 +87,11 @@ export default function Login() {
           Email ou Senha invalidos.
         </p>
       </form>
+      { erroMsg ? <p
+        data-testid="commom_register__element-invalid-register"
+      >
+        Email ou Senha invalidos.
+      </p> : null }
     </div>
   );
 }
-// <link href="/register"></link>
