@@ -91,9 +91,9 @@ export default function Login() {
       {
         erroMsg
           ?
-          <p data-testid="commom_register__element-invalid-register">
-            Email ou Senha invalidos.
-          </p>
+            <p data-testid="commom_register__element-invalid-register">
+              Email ou Senha invalidos.
+            </p>
           :
           null
       }
