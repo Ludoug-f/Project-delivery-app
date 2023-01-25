@@ -6,10 +6,10 @@ import Login from './pages/Login';
 
 function App() {
   return (
-      <Switch>
-        {/* <Route path="/register" component={ Register } /> */}
-        <Route path="/" component={ Login } />
-      </Switch>
+    <Switch>
+      {/* <Route path="/register" component={ Register } /> */}
+      <Route path="/" component={ Login } />
+    </Switch>
   );
 }
 
