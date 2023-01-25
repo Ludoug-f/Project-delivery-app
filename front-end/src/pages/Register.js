@@ -1,4 +1,4 @@
-// import
+import React, { useState, useEffect } from 'react';
 
 const SIX = 6;
 const TWELVE = 12;
