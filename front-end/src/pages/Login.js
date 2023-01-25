@@ -27,51 +27,54 @@ export default function Login() {
 
   return (
     <div>
-      <h1>Seja Bem vindo!</h1>
-
-      <p>Login:</p>
-      <input
-        type="text"
-        name="login"
-        value={ loginType }
-        onChange={ (elem) => setLoginType(elem.target.value) }
-        data-testid="commom_login__input-email"
-      />
-
-      <p>Password:</p>
-      <imput
-        type="password"
-        name="password"
-        value={ passType }
-        onChange={ (elem) => setPassType(elem.target.value) }
-        data-testid="commom_login__input-password"
-      />
-
-      <button
-        type="button"
-        name="Entrar"
-        disabled={ buttonDisabled }
-        // onClick={}
-        data-testid="commom_login__botton-login"
-      >
-        Entrar
-      </button>
-
-      <button
-        type="button"
-        name="Registre-se"
-        data-testid="commom_login__botton-register"
-        link="/register"
-      >
-        Registre-se
-      </button>
-
-      {/* { erroMsg ?
-      <p
-        data-testid="commom_login__element-invalid-email"
-      >
-        Email ou Senha invalidos.
-      </p> : null } */}
+      <form className="Login">
+        <img
+          src="https://i.imgur.com/io3eip2.png"
+          alt="logomarca da Drinks Delivery"
+        />
+        Login:
+        <label htmlFor="email">
+          <input
+            type="email"
+            id="email"
+            placeholder="Insira seu email"
+            value={ loginType }
+            data-testid="common_login__input-email"
+            onChange={ (elem) => setLoginType(elem.target.value) }
+          />
+        </label>
+        Senha:
+        <label htmlFor="password">
+          <input
+            type="password"
+            id="password"
+            placeholder="Insira sua senha"
+            value={ passType }
+            data-testid="common_login__input-password"
+            onChange={ (elem) => setPassType(elem.target.value) }
+          />
+        </label>
+        <button
+          type="submit"
+          disabled={ buttonDisabled }
+          data-testid="common_login__button-login"
+        >
+          LOGIN
+        </button>
+        <button
+          type="submit"
+          data-testid="common_login__button-register"
+          link="/register"
+        >
+          Ainda não tenho conta
+        </button>
+        <p
+          hidden="true"
+          data-testid="commom_login__element-invalid-email"
+        >
+          Email ou Senha invalidos.
+        </p>
+      </form>
     </div>
   );
 }
