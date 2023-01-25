@@ -1,4 +1,4 @@
-// import
+import React, { useState, useEffect } from 'react';
 
 const SIX = 6;
 const TWELVE = 12;
@@ -14,6 +14,7 @@ export default function Register() {
     const checkEmail = /\S+@\S+\.\S+/;
     return checkEmail.test(userEmail);
   };
+
   useEffect(() => {
     const validateLogin = () => {
       if (validateEmail(emailTypeR)
@@ -29,48 +30,60 @@ export default function Register() {
 
   return (
     <div>
-      <p>Nome:</p>
-      <input
-        type="text"
-        name="Nome"
-        value={ nameType }
-        onChange={ (elem) => setNameType(elem.target.value) }
-        data-testid="commom_register__input-name"
-      />
+      <form className="Form">
+        <p>Nome</p>
+        <label htmlFor="Nome">
+          <input
+            type="text"
+            id="Nome"
+            placeholder="Seu nome"
+            value={ nameType }
+            data-testid="commom_register__input-name"
+            onChange={ (elem) => setNameType(elem.target.value) }
+          />
+        </label>
 
-      <p>Email:</p>
-      <input
-        type="text"
-        name="Email"
-        value={ emailTypeR }
-        onChange={ (elem) => setEmailTypeR(elem.target.value) }
-        data-testid="commom_register__input-email"
-      />
+        <p>Email</p>
+        <label htmlFor="email">
+          <input
+            type="email"
+            id="email"
+            placeholder="seu-email@site.com.br"
+            value={ emailTypeR }
+            data-testid="commom_register__input-email"
+            onChange={ (elem) => setEmailTypeR(elem.target.value) }
+          />
+        </label>
 
-      <p>Email:</p>
-      <input
-        type="password"
-        name="password"
-        value={ passRegister }
-        onChange={ (elem) => setPassRegister(elem.target.value) }
-        data-testid="commom_register__input-password"
-      />
+        <p>Senha</p>
+        <label htmlFor="password">
+          <input
+            type="password"
+            id="password"
+            placeholder="**********"
+            value={ passRegister }
+            data-testid="commom_register__input-password"
+            onChange={ (elem) => setPassRegister(elem.target.value) }
+          />
+        </label>
 
-      <button
-        type="button"
-        name="Entrar"
-        disabled={ buttonDisabled }
-        // onClick={}
-        data-testid="commom_register__botton-register"
-      >
-        Entrar
-      </button>
-
-      {/* { erroMsg ? <p
-        data-testid="commom_register__element-invalid-register"
-      >
-        Email ou Senha invalidos.
-      </p> : null } */}
+        <button
+          type="submit"
+          name="Cadastrar"
+          disabled={ buttonDisabled }
+          // onClick={}
+          data-testid="commom_register__botton-register"
+        >
+          Cadastrar
+        </button>
+        { erroMsg
+          ? (
+            <div data-testid="common_login__element-invalid-email">
+              Email ou Senha invalidos.
+            </div>
+          )
+          : '' }
+      </form>
     </div>
   );
 }

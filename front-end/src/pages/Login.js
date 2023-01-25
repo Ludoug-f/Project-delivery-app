@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import APIs from '../ultils/APIs';
-// import PropTypes from 'prop-types';
 
 export default function Login() {
   const history = useHistory();
@@ -10,6 +9,10 @@ export default function Login() {
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [erroMsg, setErroMsg] = useState(false);
   const SIX = 6;
+
+  function redirectRegister() {
+    history.push('/register');
+  }
 
   const validateEmail = (userEmail) => {
     const checkEmail = /\S+@\S+\.\S+/;
@@ -39,7 +42,7 @@ export default function Login() {
 
   return (
     <div>
-      <form className="Login">
+      <form className="Form">
         <img
           src="https://i.imgur.com/io3eip2.png"
           alt="logomarca da Drinks Delivery"
@@ -77,24 +80,18 @@ export default function Login() {
         <button
           type="submit"
           data-testid="common_login__button-register"
-          link="/register"
+          onClick={ redirectRegister }
         >
           Ainda não tenho conta
         </button>
-        <p
-          hidden="true"
-          data-testid="commom_login__element-invalid-email"
-        >
-          Email ou Senha invalidos.
-        </p>
+        { erroMsg
+          ? (
+            <div data-testid="common_login__element-invalid-email">
+              Email ou Senha invalidos.
+            </div>
+          )
+          : '' }
       </form>
-      { erroMsg
-        ? (
-          <div data-testid="common_login__element-invalid-email">
-            Email ou Senha invalidos.
-          </div>
-        )
-        : '' }
     </div>
   );
 }
