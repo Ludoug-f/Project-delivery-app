@@ -6,7 +6,7 @@ export default function Login() {
   const [loginType, setLoginType] = useState('');
   const [passType, setPassType] = useState('');
   const [buttonDisabled, setButtonDisabled] = useState(true);
-  // const [erroMsg, setErroMsg] = useState(false);
+  const [erroMsg, setErroMsg] = useState(false);
   const SIX = 6;
 
   function redirectRegister() {
@@ -28,6 +28,16 @@ export default function Login() {
     };
     validateLogin();
   });
+
+  const loginClick = async (data) => {
+    const result = await APIs.LoginAPI('/login', 'POST', data);
+    const { role } = result;
+    if (role === 'costume') return history.push('/costmer/products');
+    if (role === 'seller') return history.push('/seller/orders');
+    if (role === 'admin') return history.push('/admin/manage');
+    if (response.message === 'Not found') setErroMsg(true);
+    return null;
+  };
 
   return (
     <div>
@@ -62,6 +72,7 @@ export default function Login() {
           type="submit"
           disabled={ buttonDisabled }
           data-testid="common_login__button-login"
+          onClick={ loginClick() }
         >
           LOGIN
         </button>
@@ -72,12 +83,13 @@ export default function Login() {
         >
           Ainda não tenho conta
         </button>
-        <p
-          hidden="true"
-          data-testid="commom_login__element-invalid-email"
-        >
-          Email ou Senha invalidos.
-        </p>
+        { erroMsg
+          ? (
+            <div data-testid="common_login__element-invalid-email">
+              Email ou Senha invalidos.
+            </div>
+          )
+          : '' }
       </form>
     </div>
   );

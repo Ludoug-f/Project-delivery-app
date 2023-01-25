@@ -76,12 +76,13 @@ export default function Register() {
         >
           Cadastrar
         </button>
-        <p
-          hidden="true"
-          data-testid="commom_register__element-invalid-register"
-        >
-          Email ou Senha invalidos.
-        </p>
+        { erroMsg
+          ? (
+            <div data-testid="common_login__element-invalid-email">
+              Email ou Senha invalidos.
+            </div>
+          )
+          : '' }
       </form>
     </div>
   );
