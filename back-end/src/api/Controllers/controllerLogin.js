@@ -10,4 +10,18 @@ const serviceLogin = require('../Services/serviceLogin');
     return res.status(200).json(response);
   };
 
-  module.exports = { ctrlLogin };
+ const createUser = async (req, res) => {
+    const { name, email, role } = req.body;
+  
+    const existingEmail = await serviceLogin.findByEmail(email);
+    const newUser = await serviceLogin.newUser({ name, email, role });
+  
+    if (existingEmail) {
+      return res.status(409).json({ message: 'Eamil already exists' });
+    } 
+  
+    if (newUser) {
+      return res.status(201).json(newUser);
+    }
+  };
+  module.exports = { ctrlLogin, createUser };
