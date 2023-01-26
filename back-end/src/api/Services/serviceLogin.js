@@ -30,9 +30,9 @@ const Auth = require('./auth/authLogin');
   const newUser = async (user) => {
     const { name, email, role, password } = user;
   
-    const passwordMd5 = md5(password);
+    // const passwordMd5 = md5(password);
   
-    const newUser = await User.insert({ name, email, role, password: passwordMd5 });
+    const newUser = await User.create({ name, email, role});
     //  rever logica if
     // if(newUser) return { type: '400', message: 'User already exits' }
     return { type: 201, message: newUser };
@@ -41,10 +41,7 @@ const Auth = require('./auth/authLogin');
   const findByEmail = async (email) => {
     const user = await User.findOne({ where: { email } });
   
-    if (!user) {
-      return { type: 400, message: 'Email not found' };
-    }
-    return { type: null, message: user };
+    return user
   };
 
   const findByName = async (name) => {
