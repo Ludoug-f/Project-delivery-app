@@ -22,26 +22,25 @@ const Auth = require('./auth/authLogin');
       }; 
 }
     }
-
     
     return undefined;
   };
 
   const newUser = async (user) => {
-    const { name, email, role, password } = user;
+    const { name, email, role } = user;
   
     // const passwordMd5 = md5(password);
   
-    const newUser = await User.create({ name, email, role});
+    const createUser = await User.create({ name, email, role });
     //  rever logica if
     // if(newUser) return { type: '400', message: 'User already exits' }
-    return { type: 201, message: newUser };
+    return { type: 201, message: createUser };
   };
 
   const findByEmail = async (email) => {
     const user = await User.findOne({ where: { email } });
   
-    return user
+    return user;
   };
 
   const findByName = async (name) => {
@@ -53,6 +52,5 @@ const Auth = require('./auth/authLogin');
   
     return { type: null, message: user };
   };
-  
 
   module.exports = { login, newUser, findByEmail, findByName };
