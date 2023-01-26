@@ -18,7 +18,7 @@ const serviceLogin = require('../Services/serviceLogin');
   
     if (existingEmail) {
       return res.status(409).json({ message: "Eamil already exists" });
-    }
+    } 
   
     if (existingName) {
       return res.status(409).json({ message: "Name already exists" });
