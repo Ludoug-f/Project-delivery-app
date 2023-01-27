@@ -31,25 +31,25 @@ function ProdProvider({ children }) {
 
   // Validate token
   const tokenValidation = async () => {
-    const { token } = JSON.parse(localStorage.getItem('user')) || {};
+    const { token } = JSON.parse(localStorage.getItem('user'));
     try {
       await axios.post('http://localhost:3001/login/token', { // Middleware for token validation
         token,
       });
-      getProducts();
-    } catch (_error) {
-      history.push('/login');
+    } catch (_err) {
+      history.push('/login'); // Redirect to login page if token is invalid
     }
   };
 
   // Validate token on page load and get products
   useEffect(() => {
     tokenValidation();
+    getProducts();
   }, []);
 
   // Sum of products in cart
   const sumCart = () => {
-    const Sum = cart.reduce((acc, c) => acc + (c.quantity * c.price), 0);
+    const Sum = cart.reduce((crt, p) => crt + (p.quantity * p.price), 0);
     setcartSum(Sum);
   };
 

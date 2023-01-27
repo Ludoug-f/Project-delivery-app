@@ -1,24 +1,24 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import Context from '../components/ProdContext/Context';
 import ProductCard from '../components/ProductCard';
 import NavBar from '../components/Navbar';
 import '../styles/Product.css';
 
-export default function Products() {
+export default function Products() { // Function that renders the products page
   const history = useHistory();
   const { cartSum, cart } = useContext(Context);
-  const Checkout = () => {
-    localStorage.setItem('cart', JSON.stringify(cart));
+  const Checkout = () => { // Function that redirects to the checkout page
+    localStorage.setItem('cart', JSON.stringify(cart)); // Saves the cart in the localStorage
     history.push('/customer/checkout');
   };
-  useEffect(() => {
-    console.log('Por favor monta');
-  }, []);
+  // useEffect(() => {
+  //   console.log('Por favor monta');
+  // }, []);
 
-  const EmptyCart = () => cart.every((c) => c.quantity === 0 || c.quantity === '');
+  const EmptyCart = () => cart.every((p) => p.quantity === 0 || p.quantity === '');
 
-  return (
+  return ( // Renders the page
     <>
       <NavBar />
       <ProductCard />
