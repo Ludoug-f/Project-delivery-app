@@ -18,15 +18,13 @@ const fetchBodyless = async (path, method) => {
   return response;
 };
 
-
 const GetProducts = async () => {
-  const response = fetch(`http://localhost:3001/products`, {
+  const response = fetch('http://localhost:3001/products', {
     method: 'GET',
   })
     .then((req) => req.json());
 
   return response;
 };
-
 
 export default { fetchBody, fetchBodyless, GetProducts };

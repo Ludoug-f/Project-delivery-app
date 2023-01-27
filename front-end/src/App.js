@@ -4,7 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 // import Register from './pages/Register';
 import Login from './pages/Login';
 import Products from './pages/Products';
-import ProdProvider from "./components/ProdContext/Provider";
+import ProdProvider from './components/ProdContext/Provider';
 
 function App() {
   return (

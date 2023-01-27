@@ -2,18 +2,17 @@ import axios from 'axios';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Context from './Context';
-import API from "../../utils/API";
+import API from '../../utils/API';
 
-//State management for products and cart
+// State management for products and cart
 function ProdProvider({ children }) {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
   const [cartSum, setcartSum] = useState(0);
   const history = useHistory();
 
-
   // Create cart with products and quantity 0
-  const createCart = (data) => { 
+  const createCart = (data) => {
     const emptyCart = data.map(({ id, name, price }) => ({
       id,
       name,
@@ -24,7 +23,7 @@ function ProdProvider({ children }) {
   };
 
   // Get all products from API
-  const getProducts = async () => { 
+  const getProducts = async () => {
     const data = await API.GetProducts();
     createCart(data);
     setProducts(data);
@@ -44,12 +43,18 @@ function ProdProvider({ children }) {
   };
 
   // Validate token on page load and get products
-  useEffect(() => { 
+  useEffect(() => {
     tokenValidation();
   }, []);
 
+  // Sum of products in cart
+  const sumCart = () => {
+    const Sum = cart.reduce((acc, c) => acc + (c.quantity * c.price), 0);
+    setcartSum(Sum);
+  };
+
   // Add product to cart
-  const cardAdd = (id) => { 
+  const cardAdd = (id) => {
     const newCart = cart.map((product) => {
       if (product.id === id) {
         product.quantity = product.quantity === '' ? product.quantity = 1
@@ -61,8 +66,8 @@ function ProdProvider({ children }) {
     sumCart();
   };
 
-// Remove product from cart
-  const cardRm = (id) => { 
+  // Remove product from cart
+  const cardRm = (id) => {
     const newCart = cart.map((product) => {
       if (product.id === id && product.quantity > 0) {
         product.quantity -= 1;
@@ -74,7 +79,7 @@ function ProdProvider({ children }) {
   };
 
   // Change quantity of product in cart
-  const cardQuantity = (id, value) => { 
+  const cardQuantity = (id, value) => {
     const newCart = cart.map((product) => {
       if (product.id === id) {
         product.quantity = value === '' ? value : Number(value);
@@ -85,12 +90,6 @@ function ProdProvider({ children }) {
     sumCart();
   };
 
-  // Sum of products in cart
-  const sumCart = () => { 
-    const newSum = cart.reduce((acc, c) => acc + (c.quantity * c.price), 0);
-    setcartSum(newSum);
-  };
-
   // Context to be used in children components
   const newContext = useMemo(() => ({
     products,
@@ -99,7 +98,7 @@ function ProdProvider({ children }) {
     cardAdd,
     cardRm,
     cardQuantity,
-    }), [products, cart]);
+  }), [products, cart]);
   return (
     <Context.Provider value={ newContext }>
       {children}
