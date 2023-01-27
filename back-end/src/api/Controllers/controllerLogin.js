@@ -24,4 +24,5 @@ const serviceLogin = require('../Services/serviceLogin');
       return res.status(201).json(newUser);
     }
   };
+
   module.exports = { ctrlLogin, createUser };
