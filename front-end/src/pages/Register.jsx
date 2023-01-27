@@ -1,89 +1,93 @@
-// import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import API from '../utils/API';
 
-// const SIX = 6;
-// const TWELVE = 12;
+export default function Register() {
+  const history = useHistory();
+  const [error, setError] = useState(false);
+  const [Name, setName] = useState('');
+  const [Email, setEmail] = useState('');
+  const [Password, setPassword] = useState('');
+  const [Button, setButton] = useState('');
 
-// export default function Register() {
-//   const [nameType, setNameType] = useState('');
-//   const [emailTypeR, setEmailTypeR] = useState('');
-//   const [passRegister, setPassRegister] = useState('');
-//   const [buttonDisabled, setButtonDisabled] = useState(true);
-//   // const [erroMsg, setErroMsg] = useState(false);
+  useEffect(() => {
+    const SIX = 6;
+    const TWELVE = 12;
+    const valid = /\S+@\S+\.\S+/;
+    if (valid.test(Email) && Password.length >= SIX && Name.length >= TWELVE) {
+      setButton(false);
+    } if (!valid.test(Email) || Password.length < SIX || Name.length < TWELVE) {
+      setButton(true);
+    }
+  }, [Email, Password, Name]);
 
-//   const validateEmail = (userEmail) => {
-//     const checkEmail = /\S+@\S+\.\S+/;
-//     return checkEmail.test(userEmail);
-//   };
+  const { register, handleSubmit } = useForm();
+  const onClickSubmit = async (data) => {
+    const response = await API
+      .fetchBody('/register', 'POST', { ...data, role: 'costumer' });
 
-//   useEffect(() => {
-//     const validateLogin = () => {
-//       if (validateEmail(emailTypeR)
-//       && passRegister.length > SIX
-//       && nameType.length > TWELVE) {
-//         setButtonDisabled(false);
-//         return;
-//       }
-//       setButtonDisabled(true);
-//     };
-//     validateLogin();
-//   });
+    if (response.message === 'Email already exists') {
+      setError(true);
+    }
+    if (response.message === 'Name already exists') {
+      setError(true);
+    } else {
+      const login = await API.fetchBody('/login', 'POST', data);
+      localStorage.setItem('user', JSON.stringify(login));
+      if (response.role === 'customer') return history.push('/customer/products');
+      if (response.role === 'seller') return history.push('/seller/orders');
+      history.push('/admin/manage');
+    }
+  };
 
-//   return (
-//     <div>
-//       <form className="Form">
-//         <p>Nome</p>
-//         <label htmlFor="Nome">
-//           <input
-//             type="text"
-//             id="Nome"
-//             placeholder="Seu nome"
-//             value={ nameType }
-//             data-testid="commom_register__input-name"
-//             onChange={ (elem) => setNameType(elem.target.value) }
-//           />
-//         </label>
+  return (
+    <div className="container-login">
+      {error
+      && <p data-testid="common_register__element-invalid_register">Erro no registro</p>}
+      <form className="register" onSubmit={ handleSubmit(onClickSubmit) }>
 
-//         <p>Email</p>
-//         <label htmlFor="email">
-//           <input
-//             type="email"
-//             id="email"
-//             placeholder="seu-email@site.com.br"
-//             value={ emailTypeR }
-//             data-testid="commom_register__input-email"
-//             onChange={ (elem) => setEmailTypeR(elem.target.value) }
-//           />
-//         </label>
+        <input
+          data-testid="common_register__input-name"
+          type="text"
+          placeholder="Seu Nome"
+          id="name"
+          { ...register('name', { min: 12 }) }
+          onChange={ ({ target }) => {
+            setName(target.value);
+          } }
+        />
 
-//         <p>Senha</p>
-//         <label htmlFor="password">
-//           <input
-//             type="password"
-//             id="password"
-//             placeholder="**********"
-//             value={ passRegister }
-//             data-testid="commom_register__input-password"
-//             onChange={ (elem) => setPassRegister(elem.target.value) }
-//           />
-//         </label>
+        <input
+          data-testid="common_register__input-email"
+          type="email"
+          placeholder="seu-email@site.com.br"
+          id="email"
+          { ...register('email') }
+          onChange={ ({ target }) => {
+            setEmail(target.value);
+          } }
+        />
 
-//         <button
-//           type="submit"
-//           name="Cadastrar"
-//           disabled={ buttonDisabled }
-//           // onClick={}
-//           data-testid="commom_register__botton-register"
-//         >
-//           Cadastrar
-//         </button>
-//         { erroMsg
-//           ? (
-//             <div data-testid="common_login__element-invalid-email">
-//               Email ou Senha invalidos.
-//             </div>
-//           )
-//           : '' }
-//       </form>
-//     </div>
-//   );
-// }
+        <input
+          data-testid="common_register__input-password"
+          type="password"
+          placeholder="************"
+          id="password"
+          { ...register('password', { min: 6 }) }
+          onChange={ ({ target }) => {
+            setPassword(target.value);
+          } }
+        />
+
+        <button
+          data-testid="common_register__button-register"
+          type="submit"
+          disabled={ Button }
+        >
+          CADASTRAR
+        </button>
+      </form>
+    </div>
+  );
+}
