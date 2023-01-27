@@ -11,10 +11,6 @@ export default function Register() {
   const [Password, setPassword] = useState('');
   const [Button, setButton] = useState('');
 
-  // useEffect(() => {
-  //   if (history.location.pathname === '/') history.push('/login');
-  // }, []);
-
   useEffect(() => {
     const SIX = 6;
     const TWELVE = 12;
@@ -28,9 +24,9 @@ export default function Register() {
 
   const { register, handleSubmit } = useForm();
   const onClickSubmit = async (data) => {
-    const response = await API.fetchBody('/login', 'POST', data);
+    const response = await API.fetchBody('/register', 'POST', data);
 
-    if (response.message === 'Not found') {
+    if (response.message === 'Email already exists') {
       setError(true);
     } else {
       localStorage.setItem('user', JSON.stringify(response));
@@ -71,7 +67,7 @@ export default function Register() {
         <input
           data-testid="common_register__input-password"
           type="password"
-          placeholder="password"
+          placeholder="************"
           id="password"
           { ...register('password', { min: 6 }) }
           onChange={ ({ target }) => {

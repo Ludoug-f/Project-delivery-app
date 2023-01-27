@@ -17,7 +17,7 @@ const serviceLogin = require('../Services/serviceLogin');
     const newUser = await serviceLogin.newUser({ name, email, role });
   
     if (existingEmail) {
-      return res.status(409).json({ message: 'Eamil already exists' });
+      return res.status(409).json({ message: 'Email already exists' });
     } 
   
     if (newUser) {
