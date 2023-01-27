@@ -29,6 +29,7 @@ export default function Login() {
   const onClickSubmit = async (data) => { // Send the data to the API and redirect to the correct page
     const response = await API.fetchBody('/login', 'POST', data);
 
+    // Verify if the user exists
     if (response.message === 'Not found') {
       setError(true);
     } else {
@@ -39,18 +40,14 @@ export default function Login() {
     }
   };
 
-  return ( // Render the login page
+  // Render the login page
+  return (
     <div
       className="Login-Container"
     >
       {error
-      && <p
-        className="error"
-        data-testid="common_login__element-invalid-email"
-      >
-        Erro ao fazer login
-        {/* eslint-disable-next-line no-use-before-define */}
-         </p>}
+      && <p data-testid="common_login__element-invalid-email">Email ou Senha Inválido</p>}
+
       <form className="login" onSubmit={ handleSubmit(onClickSubmit) }>
         <input
           className="email"
@@ -63,6 +60,7 @@ export default function Login() {
             setEmail(target.value);
           } }
         />
+
         <input
           className="password"
           data-testid="common_login__input-password"
