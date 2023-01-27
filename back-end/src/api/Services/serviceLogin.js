@@ -17,7 +17,7 @@ const Auth = require('./auth/authLogin');
  return {
         name: user.name,
         email,
-        token: Auth.createToken(email),
+        token: Auth.TokenCreation(user.id),
         role: user.role,
       }; 
 }
@@ -25,5 +25,5 @@ const Auth = require('./auth/authLogin');
 
     return undefined;
   };
-
+ 
   module.exports = { login };

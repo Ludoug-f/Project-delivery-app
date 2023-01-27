@@ -1,4 +1,5 @@
 const serviceLogin = require('../Services/serviceLogin');
+const Auth = require('../Services/auth/authLogin');
 
   // Verify if email and password are provided in the request body
   const ctrlLogin = async (req, res) => { 
@@ -10,4 +11,12 @@ const serviceLogin = require('../Services/serviceLogin');
     return res.status(200).json(response);
   };
 
-  module.exports = { ctrlLogin };
+  // Verify if token is provided in the request body
+  const ctrlToken = async (req, res) => {
+    const { token } = req.body;
+const response = Auth.TokenValidation(token);
+if (response) return res.status(200).json({ message: 'Valid Token' });
+return res.status(401).json({ message: 'Invalid Token' });
+  };
+
+  module.exports = { ctrlLogin, ctrlToken };
