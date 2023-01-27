@@ -1,0 +1,15 @@
+.checkout-bottom {
+  align-items: center;
+  display: flex;
+  justify-content: space-evenly;
+  margin-left: 79%;
+  margin-top: 20px;
+}
+
+body {
+  align-content: stretch;
+  align-items: stretch;
+  flex-flow: column;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
