@@ -22,8 +22,35 @@ const Auth = require('./auth/authLogin');
       }; 
 }
     }
-
+    
     return undefined;
   };
- 
-  module.exports = { login };
+
+  const newUser = async (user) => {
+    const { name, email, role } = user;
+  
+    // const passwordMd5 = md5(password);
+  
+    const createUser = await User.create({ name, email, role });
+    //  rever logica if
+    // if(newUser) return { type: '400', message: 'User already exits' }
+    return { type: 201, message: createUser };
+  };
+
+  const findByEmail = async (email) => {
+    const user = await User.findOne({ where: { email } });
+  
+    return user;
+  };
+
+  const findByName = async (name) => {
+    const user = await User.findOne({ where: { name } });
+  
+    if (!user) {
+      return { type: 400, message: 'Name not found' };
+    }
+  
+    return { type: null, message: user };
+  };
+
+  module.exports = { login, newUser, findByEmail, findByName };

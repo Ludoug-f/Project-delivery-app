@@ -3,14 +3,21 @@ const cors = require('cors');
 const route = require('./Routes');
 const routerProducts = require('./Routes/routerProducts');
 const routerIMG = require('./Routes/imagesRoutes/routeIMG');
+const routeUser = require('./Routes/routerUser');
 
 const app = express();
 app.use(express.json());
 app.use(cors());
+
+
+const app = express();
+
+
+app.get('/coffee', (_req, res) => res.status(418).end());
 app.use(routerProducts);
 app.use('/images', routerIMG);
-app.get('/coffee', (_req, res) => res.status(418).end());
 app.use('/login', route.routerLogin);
-app.use('/products', route.routerProducts);
+app.use('/regiser', route.routerUser);
+app.use(routeUser);
 
 module.exports = app;

@@ -19,4 +19,19 @@ if (response) return res.status(200).json({ message: 'Valid Token' });
 return res.status(401).json({ message: 'Invalid Token' });
   };
 
-  module.exports = { ctrlLogin, ctrlToken };
+
+ const createUser = async (req, res) => {
+    const { name, email, role } = req.body;
+  
+    const existingEmail = await serviceLogin.findByEmail(email);
+    const newUser = await serviceLogin.newUser({ name, email, role });
+  
+    if (existingEmail) {
+      return res.status(409).json({ message: 'Eamil already exists' });
+    } 
+  
+    if (newUser) {
+      return res.status(201).json(newUser);
+    }
+  };
+  module.exports = { ctrlLogin, ctrlToken, createUser};
