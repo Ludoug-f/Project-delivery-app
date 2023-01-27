@@ -13,7 +13,7 @@ app.get('/coffee', (_req, res) => res.status(418).end());
 app.use(routerProducts);
 app.use('/images', routerIMG);
 app.use('/login', route.routerLogin);
-app.use('/regiser', route.routerRegister);
+app.use('/register', route.routerRegister);
 app.use(routerRegister);
 
 module.exports = app;

@@ -24,20 +24,14 @@ export default function Register() {
 
   const { register, handleSubmit } = useForm();
   const onClickSubmit = async (data) => {
-    const response = await API
-      .fetchBody('/register', 'POST', { ...data, role: 'costumer' });
-
-    if (response.message === 'Email already exists') {
-      setError(true);
-    }
-    if (response.message === 'Name already exists') {
+    const registerVerify = await API
+      .fetchBody('/register', 'POST', { ...data, role: 'customer' });
+    if (registerVerify.message === 'Data already exists') {
       setError(true);
     } else {
       const login = await API.fetchBody('/login', 'POST', data);
       localStorage.setItem('user', JSON.stringify(login));
-      if (response.role === 'customer') return history.push('/customer/products');
-      if (response.role === 'seller') return history.push('/seller/orders');
-      history.push('/admin/manage');
+      if (login.role === 'customer') history.push('/customer/products');
     }
   };
 
