@@ -1,12 +1,12 @@
 /* CSS for navigation bar */
 .NavName {
+  color: #4caf50;
+  display: inline;
   float: left;
   font-size: 16px;
-  color: #4CAF50;;
-  text-align: center;
   padding: 14px 16px;
+  text-align: center;
   text-decoration: none;
-  display: inline;
 }
 
 .NavName:hover {
@@ -15,13 +15,13 @@
 }
 
 .NavLogout {
+  color: black;
+  display: inline;
   float: right;
   font-size: 16px;
-  color: black;
-  text-align: center;
   padding: 14px 16px;
+  text-align: center;
   text-decoration: none;
-  display: inline;
 }
 
 .NavLogout:hover {
@@ -30,11 +30,11 @@
 }
 
 .NavProducts {
+  color: black;
   float: left;
   font-size: 16px;
-  color: black;
-  text-align: center;
   padding: 14px 16px;
+  text-align: center;
   text-decoration: none;
 }
 
@@ -44,11 +44,11 @@
 }
 
 .NavOrders {
+  color: black;
   float: left;
   font-size: 16px;
-  color: black;
-  text-align: center;
   padding: 14px 16px;
+  text-align: center;
   text-decoration: none;
 }
 

@@ -1,15 +1,15 @@
 import { useContext } from 'react';
-import Context from "./ProdContext/Context";
+import Context from './ProdContext/Context';
 import '../styles/ProductCard.css';
 
 function ProductCard() {
   const { products, cardAdd, cardRm, cart,
     cardQuantity } = useContext(Context);
   return (
-    <div className='ProductCard-Container'>
+    <div className="ProductCard-Container">
       {
         products.length ? products.map((product) => (
-          <div className='Cards' key={ product.id }>
+          <div className="Cards" key={ product.id }>
             <p data-testid={ `customer_products__element-card-title-${product.id}` }>
               {product.name}
             </p>

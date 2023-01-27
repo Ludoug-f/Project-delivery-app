@@ -1,16 +1,15 @@
 .checkout-bottom {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    margin-top: 20px;
- margin-left: 79%;
+  align-items: center;
+  display: flex;
+  justify-content: space-evenly;
+  margin-left: 79%;
+  margin-top: 20px;
 }
 
 body {
-    display: flex;
-	flex-direction: column;
-	flex-wrap: wrap;
-	justify-content: flex-start;
-	align-items: stretch;
-	align-content: stretch;
-    }
+  align-content: stretch;
+  align-items: stretch;
+  flex-flow: column;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}

@@ -2,9 +2,7 @@ import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import '../styles/NavBar.css';
 
-  
 export default function NavBar() {
-  
   const history = useHistory();
   const user = JSON.parse(localStorage.getItem('user')) || {};
 
@@ -13,16 +11,17 @@ export default function NavBar() {
     history.push('/login');
   };
   const navName = (
-    <p className='NavName' data-testid="customer_products__element-navbar-user-full-name">
+    <p className="NavName" data-testid="customer_products__element-navbar-user-full-name">
       { user.name }
     </p>
   );
   const onClickLogOut = (
-    <Link className='NavLogout'
+    <Link
+      className="NavLogout"
       data-testid="customer_products__element-navbar-link-logout"
       to="/"
       onClick={ clearLocalStorage }
-      
+
     >
       Logout
     </Link>
@@ -31,15 +30,17 @@ export default function NavBar() {
   if (user.role === 'customer') {
     return (
       <div>
-        <Link className='NavProducts'
+        <Link
+          className="NavProducts"
           data-testid="customer_products__element-navbar-link-products"
           to="/customer/products"
-          
+
         >
           Produtos
         </Link>
-        <Link className='NavOrders'
-         data-testid="customer_products__element-navbar-link-orders"
+        <Link
+          className="NavOrders"
+          data-testid="customer_products__element-navbar-link-orders"
           to="/customer/orders"
         >
           Meus Pedidos
@@ -51,7 +52,8 @@ export default function NavBar() {
   } if (user.role === 'seller') {
     return (
       <div>
-        <Link className='NavOrders'
+        <Link
+          className="NavOrders"
           data-testid="customer_products__element-navbar-link-orders"
           to="/seller/orders"
         >
@@ -64,7 +66,8 @@ export default function NavBar() {
   } if (user.role === 'administrator') {
     return (
       <div>
-        <Link className='NavOrders'
+        <Link
+          className="NavOrders"
           data-testid="customer_products__element-navbar-link-orders"
           to="/admin/manage"
         >

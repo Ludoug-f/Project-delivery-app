@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import API from '../utils/API';
 import '../styles/Login.css';
 
-export default function Login() { 
+export default function Login() {
   const history = useHistory();
   const [error, setError] = useState(false);
   const [Email, setEmail] = useState('');
@@ -25,7 +25,7 @@ export default function Login() {
     }
   }, [Email, Password]);
 
-  const { register, handleSubmit } = useForm(); 
+  const { register, handleSubmit } = useForm();
   const onClickSubmit = async (data) => { // Send the data to the API and redirect to the correct page
     const response = await API.fetchBody('/login', 'POST', data);
 
@@ -40,14 +40,20 @@ export default function Login() {
   };
 
   return ( // Render the login page
-    <div 
-      className="Login-Container">
+    <div
+      className="Login-Container"
+    >
       {error
-      && <p 
-       className="error"
-       data-testid="common_login__element-invalid-email">Erro ao fazer login</p>}
+      && <p
+        className="error"
+        data-testid="common_login__element-invalid-email"
+      >
+        Erro ao fazer login
+        {/* eslint-disable-next-line no-use-before-define */}
+         </p>}
       <form className="login" onSubmit={ handleSubmit(onClickSubmit) }>
-        <input className='email'
+        <input
+          className="email"
           data-testid="common_login__input-email"
           type="email"
           placeholder="email"
@@ -57,8 +63,8 @@ export default function Login() {
             setEmail(target.value);
           } }
         />
-        <input 
-          className='password'
+        <input
+          className="password"
           data-testid="common_login__input-password"
           type="password"
           placeholder="password"
@@ -68,8 +74,8 @@ export default function Login() {
             setPassword(target.value);
           } }
         />
-        <button 
-          className='button'
+        <button
+          className="button"
           data-testid="common_login__button-login"
           type="submit"
           disabled={ Button }
@@ -79,8 +85,8 @@ export default function Login() {
         <Link
           to="/register"
         >
-          <button 
-            className='button'
+          <button
+            className="button"
             data-testid="common_login__button-register"
             type="button"
           >

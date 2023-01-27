@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
-import { useHistory, Link } from 'react-router-dom';
-import Context from "../components/ProdContext/Context";
+import { useHistory } from 'react-router-dom';
+import Context from '../components/ProdContext/Context';
 import ProductCard from '../components/ProductCard';
 import NavBar from '../components/Navbar';
 import '../styles/Product.css';
@@ -22,7 +22,7 @@ export default function Products() {
     <>
       <NavBar />
       <ProductCard />
-      
+
       <button
         className="checkout-bottom"
         data-testid="customer_products__button-cart"
@@ -30,7 +30,7 @@ export default function Products() {
         onClick={ Checkout }
         disabled={ EmptyCart() }
       >
-        <p data-testid="customer_products__checkout-bottom-value" >
+        <p data-testid="customer_products__checkout-bottom-value">
           {cartSum.toFixed(2).replace('.', ',')}
         </p>
       </button>

@@ -19,7 +19,6 @@ if (response) return res.status(200).json({ message: 'Valid Token' });
 return res.status(401).json({ message: 'Invalid Token' });
   };
 
-
  const createUser = async (req, res) => {
     const { name, email, role } = req.body;
   
@@ -34,4 +33,4 @@ return res.status(401).json({ message: 'Invalid Token' });
       return res.status(201).json(newUser);
     }
   };
-  module.exports = { ctrlLogin, ctrlToken, createUser};
+  module.exports = { ctrlLogin, ctrlToken, createUser };
