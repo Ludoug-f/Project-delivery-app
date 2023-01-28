@@ -41,5 +41,4 @@ return res.status(401).json({ message: 'Invalid Token' });
   //   }
   // };
 
-
   module.exports = { ctrlLogin, ctrlToken };

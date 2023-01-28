@@ -1,7 +1,7 @@
-const { Op} = require("sequelize");
+const { Op } = require('sequelize');
+const md5 = require('md5');
 const { User } = require('../../database/models');
-const md5 = require ("md5");
-const { TokenCreation} = require('./auth/authLogin');
+const { TokenCreation } = require('./auth/authLogin');
 
 // const newUser = async (user) => {
 //     const { name, email, role } = user;
@@ -30,16 +30,17 @@ const { TokenCreation} = require('./auth/authLogin');
 //     return { type: null, message: user };
 //   };
 
-const checkUser = async ({name, email, password, role}) => {
-    const user = await User.findOne({ where: { [Op.or]: [{name}, {email}] } });
+const checkUser = async ({ name, email, password, role }) => {
+    const user = await User.findOne({ where: { [Op.or]: [{ name }, { email }] } });
 const passEncryp = md5(password);
-    if(!user) {
+    if (!user) {
         try {
             const createUser = await User.create({ name, email, password: passEncryp, role });
             return TokenCreation(createUser.email);
-        } catch(err){
+        } catch (err) {
             console.log(err);
-
-    }}};
+    } 
+} 
+};
 
     module.exports = { checkUser };
