@@ -35,10 +35,11 @@ function Admin() {
       userRole
     }
     setUSerList([...userList, newUser]);
-    setUserName('')
-    setUserEmail('')
-    setUserPassword('')
-    setUserRole('vendedor')
+    setUserName('');
+    setUserEmail('');
+    setUserPassword('');
+    setUserRole('vendedor');
+    setRegisterButton(false);
   };
 
 
