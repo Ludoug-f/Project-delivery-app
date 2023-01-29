@@ -19,21 +19,26 @@ function Admin() {
       condPassword = true;
     }
     if (red.test(userEmail)) {
-      return condEmail = true
+      condEmail = true
     }
     if (condName && condEmail && condPassword) {
       return setRegisterButton(false)
     }
   };
 
-  const registerUserButtonClick = () => {
+  const registerUserButtonClick = (e) => {
+    e.preventDefault();
     const newUser = {
       userName,
       userEmail,
       userPassword,
       userRole
     }
-    return setUSerList([...userList, newUser]);
+    setUSerList([...userList, newUser]);
+    setUserName('')
+    setUserEmail('')
+    setUserPassword('')
+    setUserRole('vendedor')
   };
 
 
