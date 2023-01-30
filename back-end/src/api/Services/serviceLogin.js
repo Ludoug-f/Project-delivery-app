@@ -46,10 +46,6 @@ const Auth = require('./auth/authLogin');
   const findByName = async (name) => {
     const user = await User.findOne({ where: { name } });
   
-    if (!user) {
-      return { type: 400, message: 'Name not found' };
-    }
-  
     return { type: null, message: user };
   };
 

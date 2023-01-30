@@ -14,11 +14,17 @@ const serviceLogin = require('../Services/serviceLogin');
     const { name, email, role } = req.body;
   
     const existingEmail = await serviceLogin.findByEmail(email);
+    const existingName = await serviceLogin.findByName(name);
+
     const newUser = await serviceLogin.newUser({ name, email, role });
   
     if (existingEmail) {
       return res.status(409).json({ message: 'Eamil already exists' });
-    } 
+    }  
+
+    if (existingName) {
+      return res.status(409).json({ message: 'Name already exists' });
+    }
   
     if (newUser) {
       return res.status(201).json(newUser);
