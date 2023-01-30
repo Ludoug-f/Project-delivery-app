@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useState } from 'react'; // , { useContext }
 import NavBar from '../components/Navbar';
 // import '../styles/Seeler.css';
 
 export default function Seller() {
-  // const [Order, setOrder] = useContext('');
-  // const [Check, setCheck] = useContext(false);
+  const [Order, setOrder] = useState('');
+  const [Check, setCheck] = useState(false);
 
   return (
     <>
@@ -14,6 +14,18 @@ export default function Seller() {
       /> : <Details
         props={ setOrder, setCheck }
       /> } */}
+      { Check ? <p>OK</p> : <p>Not</p> }
+      <button
+        type="button"
+        onClick={ () => setCheck(true) }
+      >
+        Mudar o Check
+      </button>
+      { Order }
+      <input
+        value={ Order }
+        onChange={ () => setOrder(target.value) }
+      />
     </>
   );
 }

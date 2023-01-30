@@ -1,6 +1,11 @@
-import { useContext } from 'react';
+import { useState } from 'react';
 // import { setOrder, setCheck } from '../../pages/Seeler';
 
-export default function Requests(props) {
-  const { setOrder, setCheck } = useContext(Context);
+export default function Requests({ setOrder, setCheck }) {
+  return (
+    <div>
+      Orders:
+      {}
+    </div>
+  );
 }
