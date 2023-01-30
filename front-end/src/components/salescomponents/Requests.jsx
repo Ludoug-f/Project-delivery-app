@@ -18,6 +18,23 @@ export default function Requests() {
         >
           StatusID
         </div>
+        <div>
+          <div
+            data-testid="seller_orders__element-order-date-<id></id>"
+          >
+            Data
+          </div>
+          <div
+            data-testid="seller_orders__element-card-price-<id>"
+          >
+            Preço
+          </div>
+        </div>
+        <div
+          data-testid="seller_orders__element-card-address-<id></id>"
+        >
+          Endereço
+        </div>
       </div>
     </div>
   );
