@@ -11,6 +11,11 @@ export default function Seller() {
       <NavBar />
       <p>Começando</p>
       <p>Ah</p>
+      { Check ? <Request
+        props={ setOrder, setCheck }
+      /> : <Details
+        props={ setOrder, setCheck }
+      /> }
     </>
   );
 }
