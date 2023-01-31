@@ -34,7 +34,8 @@ const Auth = require('./auth/authLogin');
     const createUser = await User.create({ name, email, role });
     if (createUser) return { type: '400', message: 'User already exits' };
     //  rever logica if
-    return { type: 201, message: createUser };
+    // if(newUser) return { type: '400', message: 'User already exits' }
+    return { message: createUser };
   };
 
   const findByEmail = async (email) => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import { Route, Switch } from 'react-router-dom';
-// import Register from './pages/Register';
+import Register from './pages/Register';
 import Login from './pages/Login';
 import Products from './pages/Products';
 import ProdProvider from './components/ProdContext/Provider';
@@ -14,7 +14,7 @@ function App() {
           <Products />
         </ProdProvider>
       </Route>
-      {/* <Route path="/register" component={ Register } /> */}
+      <Route path="/register" component={ Register } />
       <Route path="/" component={ Login } />
     </Switch>
   );
