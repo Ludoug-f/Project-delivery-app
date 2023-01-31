@@ -12,12 +12,12 @@
         </div>
         <div>
           <div
-            data-testid="seller_orders__element-order-date-<id></id>"
+            data-testid="seller_orders__element-order-date-"
           >
             Data
           </div>
           <div
-            data-testid="seller_orders__element-card-price-<id>"
+            data-testid="seller_orders__element-card-price-"
           >
             Preço
           </div>
