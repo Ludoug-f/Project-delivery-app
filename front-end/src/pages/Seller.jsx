@@ -12,29 +12,32 @@ export default function Seller() {
   return (
     <>
       <NavBar />
-      { Check ? <Requests
-        // props={ [setOrder, setCheck, pedidosMock] }
-        setOrder={ setOrder }
-        setCheck={ setCheck }
-        pedidosMock={ pedidosMock }
-      /> : <Details
-        // props={ [setOrder, setCheck, detailsMock] }
-        setOrder={ setOrder }
-        setCheck={ setCheck }
-        detailsMock={ detailsMock }
-      /> }
-      { Check ? <p>OK</p> : <p>Not</p> }
-      <button
-        type="button"
-        onClick={ () => setCheck(true) }
-      >
-        Mudar o Check
-      </button>
-      { Order }
-      <input
-        value={ Order }
-        onChange={ () => setOrder(target.value) }
-      />
+      <br />
+      <div>
+        { Check ? <Requests
+          // props={ [setOrder, setCheck, pedidosMock] }
+          setOrder={ setOrder }
+          setCheck={ setCheck }
+          requestList={ pedidosMock }
+        /> : <Details
+          // props={ [setOrder, setCheck, detailsMock] }
+          setOrder={ setOrder }
+          setCheck={ setCheck }
+          detailInfo={ detailsMock }
+        /> }
+        { Check ? <p>OK</p> : <p>Not</p> }
+        <button
+          type="button"
+          onClick={ () => setCheck(true) }
+        >
+          Mudar o Check
+        </button>
+        { Order }
+        <input
+          value={ Order }
+          onChange={ () => setOrder(target.value) }
+        />
+      </div>
     </>
   );
 }

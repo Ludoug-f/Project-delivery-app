@@ -58,4 +58,4 @@ const detailsMock = [
 ];
 
 // export default { pedidosMock, detailsMock };
-module.exports = { pedidosMock, detailsMock };
+export { pedidosMock, detailsMock };

@@ -1,7 +1,9 @@
 import React from 'react'; // , { useState }
+import PropTypes from 'prop-types';
 // import { detailsMock } from '../salescomponents/Mocks';
 
 export default function Details({ setOrder, setCheck, detailInfo }) {
+  console.log('sets: ', setOrder, setCheck, ' == details: ', detailInfo);
   return (
     <div>
       Detalhes do Produto:

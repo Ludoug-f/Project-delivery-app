@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Products from './pages/Products';
+import Seller from './pages/Seller';
 import ProdProvider from './components/ProdContext/Provider';
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         </ProdProvider>
       </Route>
       <Route path="/register" component={ Register } />
+      <Route path="/seller" component={ Seller } />
       <Route path="/" component={ Login } />
     </Switch>
   );
