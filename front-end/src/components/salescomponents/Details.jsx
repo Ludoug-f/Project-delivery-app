@@ -1,37 +1,45 @@
+/* eslint-disable react/prop-types */
 import React from 'react'; // , { useState }
 import PropTypes from 'prop-types';
 // import { detailsMock } from '../salescomponents/Mocks';
 
-export default function Details({ setOrder, setCheck, detailInfo }) {
-  console.log('sets: ', setOrder, setCheck, ' == details: ', detailInfo);
+// eslint-disable-next-line react/prop-types
+export default function Details({ setOrder, setCheck, detailInfo, requestInfo }) {
+  console.log('sets: ', setOrder, setCheck, ' == details: ', detailInfo, requestInfo);
   return (
     <div>
       Detalhes do Produto:
-      <div>
+      { detailInfo.map((elem) => (
         <div
-          // Header Lista
-          className="HeaderRequestList"
+          key={ elem.product_id }
         >
-          <div>
-            Pedido
-          </div>
-          <div>
-            Data
-          </div>
-          <div>
-            Status
-          </div>
-          <div>
-            Mudar Info
-          </div>
+          { elem.product_id }
         </div>
-        <div
-          // Lista completa
-          className="RequestList"
-        >
-          Lista
-        </div>
-      </div>
+      ))}
     </div>
   );
 }
+
+Details.propTypes = {
+  children: PropTypes.shape({
+    setOrder: PropTypes.func.isRequired,
+    setCheck: PropTypes.func.isRequired,
+    detailInfo: PropTypes.arrayOf({
+      type: PropTypes.shape({
+        sale_id: PropTypes.number.isRequired,
+        product_id: PropTypes.number.isRequired,
+        quantity: PropTypes.number.isRequired,
+      }),
+    }).isRequired,
+    requestInfo: PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      user_id: PropTypes.number.isRequired,
+      seller_id: PropTypes.number.isRequired,
+      total_price: PropTypes.number.isRequired,
+      delivery_adress: PropTypes.string.isRequired,
+      delivery_number: PropTypes.string.isRequired,
+      sale_date: PropTypes.string.isRequired,
+      status: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
+};
