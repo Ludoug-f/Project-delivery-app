@@ -149,7 +149,7 @@ function Admin() {
             <p
               data-testid={ `admin_manage__element-user-table-role-${index}` }
             >
-              {e.role}
+              {e.tipo}
             </p>
             <button
               type="button"
