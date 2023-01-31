@@ -6,6 +6,7 @@ require('dotenv');
   const secret = fs.readFileSync('./jwt.evaluation.key', 'utf-8');
   const TokenCreation = (id) => jwt.sign(id, secret);
   const LoginToken = (id) => jwt.sign(id, secret, { expiresIn: '7d' });
+  
   const TokenValidation = (token) => {
     try {
       const decoded = jwt.verify(token, secret);
