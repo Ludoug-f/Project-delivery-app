@@ -1,0 +1,58 @@
+/* CSS for navigation bar */
+.NavName {
+  color: #4caf50;
+  display: inline;
+  float: left;
+  font-size: 16px;
+  padding: 14px 16px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.NavName:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.NavLogout {
+  color: black;
+  display: inline;
+  float: right;
+  font-size: 16px;
+  padding: 14px 16px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.NavLogout:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.NavProducts {
+  color: black;
+  float: left;
+  font-size: 16px;
+  padding: 14px 16px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.NavProducts:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.NavOrders {
+  color: black;
+  float: left;
+  font-size: 16px;
+  padding: 14px 16px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.NavOrders:hover {
+  background-color: #ddd;
+  color: black;
+}
