@@ -14,7 +14,7 @@ export default function Seller() {
       <NavBar />
       <br />
       <div>
-        { Check ? <Requests
+        { !Check ? <Requests
           // props={ [setOrder, setCheck, pedidosMock] }
           setOrder={ setOrder }
           setCheck={ setCheck }
