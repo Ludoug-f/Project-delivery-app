@@ -24,6 +24,7 @@ export default function Seller() {
           setOrder={ setOrder }
           setCheck={ setCheck }
           detailInfo={ detailsMock }
+          requestInfo={ pedidosMock[Order] }
         /> }
         { Check ? <p>OK</p> : <p>Not</p> }
         <button
