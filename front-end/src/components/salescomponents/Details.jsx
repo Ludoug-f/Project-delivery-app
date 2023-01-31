@@ -1,6 +1,7 @@
 import React from 'react'; // , { useState }
+// import { detailsMock } from '../salescomponents/Mocks';
 
-export default function Details() {
+export default function Details({ setOrder, setCheck, detailInfo }) {
   return (
     <div>
       Detalhes do Produto:
@@ -30,5 +31,5 @@ export default function Details() {
         </div>
       </div>
     </div>
-  )
+  );
 }

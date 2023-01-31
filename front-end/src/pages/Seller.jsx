@@ -1,6 +1,9 @@
 import React, { useState } from 'react'; // , { useContext }
 import NavBar from '../components/Navbar';
+import Requests from '../components/salescomponents/Requests';
+import Details from '../components/salescomponents/Details';
 // import '../styles/Seeler.css';
+import { pedidosMock, detailsMock } from '../components/salescomponents/Mocks';
 
 export default function Seller() {
   const [Order, setOrder] = useState('');
@@ -9,11 +12,17 @@ export default function Seller() {
   return (
     <>
       <NavBar />
-      {/* { Check ? <Request
-        props={ setOrder, setCheck }
+      { Check ? <Requests
+        // props={ [setOrder, setCheck, pedidosMock] }
+        setOrder={ setOrder }
+        setCheck={ setCheck }
+        pedidosMock={ pedidosMock }
       /> : <Details
-        props={ setOrder, setCheck }
-      /> } */}
+        // props={ [setOrder, setCheck, detailsMock] }
+        setOrder={ setOrder }
+        setCheck={ setCheck }
+        detailsMock={ detailsMock }
+      /> }
       { Check ? <p>OK</p> : <p>Not</p> }
       <button
         type="button"

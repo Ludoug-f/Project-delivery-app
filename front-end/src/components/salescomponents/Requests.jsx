@@ -1,22 +1,23 @@
 import React from 'react'; // , { useState }
 // import { setOrder, setCheck } from '../../pages/Seeler';
+// import { pedidosMock } from '../salescomponents/Mocks';
 
-export default function Requests() {
+export default function Requests({ setOrder, setCheck, requestList }) {
   return (
     <div>
       Orders:
       {/* Aqui era para ter um Map */}
       <div>
         <div
-          data-testid="seller_order__element-order-id-<id>"
-          // tem que concerar o ID em cima
+          data-testid={ `seller_order__element-order-id-${id}` }
+          // tem que concertar o ID em cima
         >
-          Pedido id
+          Pedido {/* elem.id */}
         </div>
         <div
           data-testid="seller_order__element-delivery-status-<id>"
         >
-          StatusID
+          Status {/* elem.status */}
         </div>
         <div>
           <div
