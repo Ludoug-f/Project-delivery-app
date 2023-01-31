@@ -1,4 +1,4 @@
 const routerLogin = require('./routerLogin');
-const routerUser = require('./routerUser');
+const routerRegister = require('./routerRegister');
 
-module.exports = { routerLogin, routerUser };
+module.exports = { routerLogin, routerRegister };
