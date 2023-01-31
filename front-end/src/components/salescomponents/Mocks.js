@@ -2,8 +2,8 @@
 const pedidosMock = [
   {
     id: 1,
-    uder_id: 1,
-    seller_id: 2,
+    uder_id: 3,
+    seller_id: 1,
     total_price: 7.50,
     delivery_adress: 'Av brTrybe',
     delivery_number: '123456',
@@ -12,8 +12,8 @@ const pedidosMock = [
   },
   {
     id: 2,
-    uder_id: 1,
-    seller_id: 2,
+    uder_id: 3,
+    seller_id: 1,
     total_price: 17.20,
     delivery_adress: 'Av Zé Birita',
     delivery_number: '0800',
@@ -22,8 +22,8 @@ const pedidosMock = [
   },
   {
     id: 3,
-    uder_id: 1,
-    seller_id: 2,
+    uder_id: 3,
+    seller_id: 1,
     total_price: 25.46,
     delivery_adress: 'Rua dos Bobos número 0',
     delivery_number: '000',
