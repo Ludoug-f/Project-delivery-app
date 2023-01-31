@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 function Admin() {
   const [userName, setUserName] = useState('');
@@ -8,26 +8,37 @@ function Admin() {
   const [registerButton, setRegisterButton] = useState(true);
   const [userList, setUSerList] = useState([]);
 
-  const TWELVE = 12;
-  const SIX = 6;
+  // const validateButton = () => {
+  //   const condName = false;
+  //   const condEmail = false;
+  //   const condPassword = false;
+  //   const reg = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
 
-  const validateButton = () => {
-    const condName = false;
-    const condEmail = false;
-    const condPassword = false;
-    const reg = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+  //   if (userName.length >= TWELVE && userPassword.length >= SIX) {
+  //     condName = true;
+  //     condPassword = true;
+  //   }
+  //   if (reg.test(userEmail)) {
+  //     condEmail = true;
+  //   }
+  //   if (condName && condEmail && condPassword) {
+  //     return setRegisterButton(false);
+  //   }
+  // };
 
-    if (userName.length >= TWELVE && userPassword.length >= SIX) {
-      condName = true;
-      condPassword = true;
+  useEffect(() => {
+    const SIX = 6;
+    const TWELVE = 12;
+    const valid = /\S+@\S+\.\S+/;
+    if (
+      valid.test(userEmail)
+      && userPassword.length >= SIX && userName.length >= TWELVE) {
+      setRegisterButton(false);
+    } if (
+      !valid.test(userEmail) || userPassword.length < SIX || userName.length < TWELVE) {
+      setRegisterButton(true);
     }
-    if (reg.test(userEmail)) {
-      condEmail = true;
-    }
-    if (condName && condEmail && condPassword) {
-      return setRegisterButton(false);
-    }
-  };
+  }, [userEmail, userPassword, userName]);
 
   const registerUserButtonClick = (e) => {
     e.preventDefault();
@@ -71,28 +82,24 @@ function Admin() {
           <h2>Cadastrar novos usuários</h2>
           <input
             onChange={ ({ target }) => { setUserName(target.value); } }
-            placeholder="nome"
+            placeholder="Nome e sobrenome"
             type="text"
+            id="name"
             data-testid="admin_manage__input-name"
-          >
-            {userName}
-          </input>
+          />
           <input
             onChange={ ({ target }) => { setUserEmail(target.value); } }
-            placeholder="email"
-            type="text"
+            id="email"
+            placeholder="seu-email@site.com.br"
+            type="email"
             data-testid="admin_manage__input-email"
-          >
-            {userEmail}
-          </input>
+          />
           <input
             onChange={ ({ target }) => { setUserPassword(target.value); } }
-            placeholder="senha"
-            type="text"
+            placeholder="************"
+            type="password"
             data-testid="admin_manage__input-password"
-          >
-            {userPassword}
-          </input>
+          />
           <select
             onChange={ ({ target }) => { setUserRole(target.value); } }
             value={ userRole }
@@ -116,43 +123,42 @@ function Admin() {
             data-testid="admin_manage__button-register"
           >
             Cadastrar
-
           </button>
         </div>
       </div>
       <div>
         Quadro de lista de usuários
         <h1>Quadro de usuários</h1>
-        { userList.map((e, index) => {
-          <div>
+        { userList.map((e, index) => (
+          <div key={ index }>
             <p
-              data-testid="admin_manage__element-user-table-item-number-<index>"
+              data-testid={ `admin_manage__element-user-table-item-number-${index}` }
             >
               {index}
             </p>
             <p
-              data-testid="admin_manage__element-user-table-item-name-<index>"
+              data-testid={ `admin_manage__element-user-table-item-name-${index}` }
             >
               {e.name}
             </p>
             <p
-              data-testid="admin_manage__element-user-table-email-<index>"
+              data-testid={ `admin_manage__element-user-table-email-${index}` }
             >
               {e.email}
             </p>
             <p
-              data-testid="admin_manage__element-user-table-role-<index>"
+              data-testid={ `admin_manage__element-user-table-role-${index}` }
             >
-              {e.tipo}
+              {e.role}
             </p>
             <button
               type="button"
-              data-testid="admin_manage__element-user-table-remove-<index>"
+              data-testid={ `admin_manage__element-user-table-remove-${index}` }
             >
               Excluir
             </button>
-          </div>;
-        })}
+          </div>
+        ))}
       </div>
     </div>
   );
