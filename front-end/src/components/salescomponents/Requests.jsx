@@ -6,6 +6,10 @@ import PropTypes from 'prop-types';
 export default function Requests({ setOrder, setCheck, requestList }) {
   // const { setOrder, setCheck, requestList } = PropTypes;
   console.log(setOrder, setCheck, requestList);
+  const clickHere = (id) => {
+    setCheck(true);
+    setOrder(id);
+  }
   return (
     <div>
       Orders:
@@ -14,7 +18,7 @@ export default function Requests({ setOrder, setCheck, requestList }) {
         <div
           key={ elem.id }
           // eslint-disable-next-line no-unused-expressions, no-sequences
-          onClick={ () => { setCheck(true) setOrder(elem.id); } }
+          onClick={ () => clickHere(id) }
         >
           <div
             data-testid={ `seller_order__element-order-id-${id}` }
