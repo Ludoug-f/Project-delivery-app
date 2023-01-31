@@ -10,8 +10,11 @@ export default function Requests({ setOrder, setCheck, requestList }) {
     <div>
       Orders:
       { requestList.map((elem) => (
+        // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
         <div
           key={ elem.id }
+          // eslint-disable-next-line no-unused-expressions, no-sequences
+          onClick={ () => { setCheck(true) setOrder(elem.id); } }
         >
           <div
             data-testid={ `seller_order__element-order-id-${id}` }
@@ -51,5 +54,8 @@ export default function Requests({ setOrder, setCheck, requestList }) {
 }
 
 Request.propTypes = {
-  setOrder: PropTypes.
+  setOrder: PropTypes.func.isRequired,
+  setCheck: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  requestList: PropTypes.array.isRequired,
 };
