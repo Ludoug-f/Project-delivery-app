@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 // import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import NavBar from "../components/Navbar";
+import NavBar from '../components/Navbar';
 import API from '../utils/API';
 import '../styles/Checkout.css';
 
@@ -26,13 +25,13 @@ function Checkout() {
     setTotal(sum);
   };
 
-const getSellers = async () => {
-  const data = await API.GetSellers();
-  setSellers(data);
-  setValue('seller', data[0].id);
-};
+  const getSellers = async () => {
+    const data = await API.GetSellers();
+    setSellers(data);
+    setValue('seller', data[0].id);
+  };
 
-  const fetchSeller = async () => { 
+  const fetchSeller = async () => {
     getSellers();
     const cartLocalStorage = JSON.parse(localStorage.getItem('cart'));
 
@@ -58,9 +57,8 @@ const getSellers = async () => {
   useEffect(() => {
     fetchSeller();
     calculateCart();
-  },[products]);
+  }, [products]);
 
- 
   // const closeOrder = async ({ address, number, seller }) => {
   //   const user = JSON.parse(localStorage.getItem('user'));
   //   const saleBody = {
@@ -81,8 +79,8 @@ const getSellers = async () => {
   // };
 
   return (
-    <div className='Checkout-body'>
-  
+    <div className="Checkout-body">
+
       {
         NavBar()
       }
@@ -95,9 +93,9 @@ const getSellers = async () => {
             Carregando...
           </div>
         ) : (
-          <table className='Order'>
+          <table className="Order">
             <thead>
-              <tr >
+              <tr>
                 <th>Item</th>
                 <th>Descrição</th>
                 <th>Quantidade</th>
