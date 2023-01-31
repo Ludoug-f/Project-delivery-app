@@ -1,8 +1,9 @@
+import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-// import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import NavBar from '../components/Navbar';
-import API from '../utils/API';
+// import API from '../utils/API';
 import '../styles/Checkout.css';
 
 function Checkout() {
@@ -13,7 +14,7 @@ function Checkout() {
 
   const { register, handleSubmit, setValue } = useForm();
 
-  // const history = useHistory();
+  const history = useHistory();
 
   const calculateCart = () => { // Calculate total price
     let sum = 0;
@@ -25,14 +26,23 @@ function Checkout() {
     setTotal(sum);
   };
 
-  const getSellers = async () => {
-    const data = await API.GetSellers();
-    setSellers(data);
-    setValue('seller', data[0].id);
-  };
+  // // Get sellers from API
+  // const getSellers = async () => {
+  //   const data = await API.GetSellers();
+  //   setSellers(data);
+  //   setValue('seller', data[0].id);
+  // };
 
+  // Fetch sellers
   const fetchSeller = async () => {
-    getSellers();
+    try {
+      const sellersResponse = await axios.get('http://localhost:3001/sellers');
+      setSellers(sellersResponse.data);
+      setValue('seller', sellersResponse.data[0].id);
+    } catch (e) {
+      console.log(e);
+    }
+
     const cartLocalStorage = JSON.parse(localStorage.getItem('cart'));
 
     if (cartLocalStorage) { // Filter products with quantity 0
@@ -45,7 +55,8 @@ function Checkout() {
     setLoading(false);
   };
 
-  const removeItem = (item) => { // Remove item from cart
+  // Remove item from cart
+  const removeItem = (item) => {
     const filteredArray = products
       .filter((product) => product.id !== item.id);
     setProducts(filteredArray);
@@ -56,27 +67,32 @@ function Checkout() {
 
   useEffect(() => {
     fetchSeller();
+  }, []);
+
+  useEffect(() => {
     calculateCart();
   }, [products]);
 
-  // const closeOrder = async ({ address, number, seller }) => {
-  //   const user = JSON.parse(localStorage.getItem('user'));
-  //   const saleBody = {
-  //     token: user.token,
-  //     sale: {
-  //       seller_id: seller,
-  //       total_price: total,
-  //       delivery_address: address,
-  //       delivery_number: number,
-  //       saleDate: new Date(),
-  //       status: 'Pendente',
-  //     },
-  //     products: products.map(({ id: productId, quantity }) => ({ productId, quantity })),
-  //   };
+  const closeOrder = async ({ address, number, seller,
+  }) => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const saleBody = {
+      token: user.token,
+      sale: {
+        seller_id: seller,
+        total_price: total,
+        delivery_address: address,
+        delivery_number: number,
+        sale_date: new Date(),
+        status: 'Pendente',
+      },
+      // products: products.map(({ id: product_id, quantity,
+      // }) => ({ product_id, quantity })),
+    };
 
-  //   const { data: { id } } = await axios.post('http://localhost:3001/sales', saleBody, { headers: { authorization: user.token } });
-  //   history.push(`/customer/orders/${id}`);
-  // };
+    const { data: { id } } = await axios.post('http://localhost:3001/sales', saleBody, { headers: { authorization: user.token } });
+    history.push(`/customer/orders/${id}`);
+  };
 
   return (
     <div className="Checkout-body">

@@ -1,8 +1,8 @@
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 const route = require('./Routes');
 const routerProducts = require('./Routes/routerProducts');
-const routerIMG = require('./Routes/imagesRoutes/routeIMG');
 const routerRegister = require('./Routes/routerRegister');
 const routerUser = require('./Routes/routerUser');
 // const routerSales = require('./Routes/routerSales');
@@ -14,7 +14,7 @@ app.use(cors());
 app.get('/coffee', (_req, res) => res.status(418).end());
 // app.use(routerSales);
 app.use(routerProducts);
-app.use('/images', routerIMG);
+app.use('/images', express.static(path.join(__dirname, '..', '..', 'public')));
 app.use('/login', route.routerLogin);
 app.use('/register', route.routerRegister);
 app.use(routerRegister);
