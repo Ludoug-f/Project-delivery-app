@@ -27,4 +27,13 @@ const GetProducts = async () => {
   return response;
 };
 
-export default { fetchBody, fetchBodyless, GetProducts };
+const GetSellers = async () => {
+  const response = fetch('http://localhost:3001/sellers', {
+    method: 'GET',
+  })
+    .then((req) => req.json());
+
+  return response;
+};
+
+export default { fetchBody, fetchBodyless, GetProducts, GetSellers };

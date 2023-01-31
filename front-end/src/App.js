@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import { Route, Switch } from 'react-router-dom';
+import Checkout from './pages/Checkout';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Products from './pages/Products';
@@ -16,6 +17,7 @@ function App() {
           <Products />
         </ProdProvider>
       </Route>
+      <Route path="/customer/checkout" component={ Checkout } />
       <Route path="/admin/manage" component={ Admin } />
       <Route path="/register" component={ Register } />
       <Route path="/" component={ Login } />
