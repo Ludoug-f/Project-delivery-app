@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 // import { pedidosMock } from '../salescomponents/Mocks';
 
 export default function Requests({ setOrder, setCheck, requestList }) {
-  // const { setOrder, setCheck, requestList } = PropTypes;
   console.log(setOrder, setCheck, requestList);
   const clickHere = (el) => {
     setCheck(true);
@@ -69,7 +68,6 @@ export default function Requests({ setOrder, setCheck, requestList }) {
 }
 
 Request.propTypes = {
-  // children: PropTypes.shape({
   setOrder: PropTypes.func.isRequired,
   setCheck: PropTypes.func.isRequired,
   requestList: PropTypes.arrayOf({
@@ -84,5 +82,4 @@ Request.propTypes = {
       status: PropTypes.string.isRequired,
     }),
   }).isRequired,
-  // }).isRequired,
 };
