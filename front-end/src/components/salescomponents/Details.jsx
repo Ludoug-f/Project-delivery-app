@@ -53,26 +53,44 @@ export default function Details({ setOrder, setCheck, detailInfo, requestInfo })
           </p>
         </button>
       ) : null }
-      { detailInfo.map((elem) => (
-        <div
-          key={ elem.product_id }
-        >
-          <p
-            data-testid={
-              `seller_order_details__element-order-table-item-number-${elem.product_id}`
-            }
+      <table>
+        <tr>
+          <td />
+          <td />
+          <td />
+          <td />
+          <td />
+        </tr>
+        { detailInfo.map((elem) => (
+          <tr
+            key={ elem.product_id }
           >
-            { elem.product_id }
-          </p>
-          <p
-            data-testid={
-              `seller_order_details__element-order-table-name-${elem.product_id}`
-            }
-          >
-            nome do produto
-          </p>
-        </div>
-      ))}
+            <td
+              data-testid={
+                `seller_order_details__element-order-table-item-number-${elem.product_id}`
+              }
+            >
+              { elem.product_id }
+            </td>
+            <td
+              data-testid={
+                `seller_order_details__element-order-table-name-${elem.product_id}`
+              }
+            >
+              nome do produto
+            </td>
+            <td>
+              Quantidade
+            </td>
+            <td>
+              Preço
+            </td>
+            <td>
+              SubTotal
+            </td>
+          </tr>
+        ))}
+      </table>
       <button
         type="button"
         onClick={ () => clickHere() }
