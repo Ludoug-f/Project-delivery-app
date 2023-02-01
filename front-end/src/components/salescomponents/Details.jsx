@@ -30,6 +30,11 @@ export default function Details({
         { requestInfo.id }
       </p>
       <p
+        data-testid="seller_order_details__element-order-details-label-order-date"
+      >
+        {requestInfo.sale_date}
+      </p>
+      <p
         data-testid="seller_order_details__element-order-details-label-delivery-status"
       >
         { orderStatus }
@@ -38,6 +43,7 @@ export default function Details({
         <button
           type="button"
           onClick={ () => setOrderStatus('preparando') }
+          data-testid="seller_order_details__button-preparing-check"
         >
           <p>
             Preparar pedido
@@ -48,6 +54,7 @@ export default function Details({
         <button
           type="button"
           onClick={ () => setOrderStatus('saiu') }
+          data-testid="seller_order_details__button-dispatch-check"
         >
           <p>
             Saiu para Entrega
@@ -72,11 +79,11 @@ export default function Details({
           <td>Preço Unitário</td>
           <td>Sub-Total</td>
         </tr>
-        { detailSelect.map((elem, index) => {
-          const product = produtosMock.find((item) => item.id === elem.product_id);
+        { detailSelect.map((el, index) => {
+          const product = produtosMock.find((item) => item.id === el.product_id);
           return (
             <tr
-              key={ elem.product_id }
+              key={ el.product_id }
             >
               <td
                 data-testid={
@@ -85,27 +92,45 @@ export default function Details({
               >
                 { index + 1 }
               </td>
-              {/* { produtosMock.map((item) => (item.id === elem.product_id) { */}
               <td
                 data-testid={
-                  `seller_order_details__element-order-table-name-${elem.product_id}`
+                  `seller_order_details__element-order-table-name-${el.product_id}`
                 }
               >
                 {product.name}
               </td>
-              <td>
-                { elem.quantity }
+              <td
+                data-testid={
+                  `eller_order_details__element-order-table-quantity-${el.product_id}`
+                }
+              >
+                { el.quantity }
               </td>
-              <td>
+              <td
+                data-testid={
+                  `seller_order_details__element-order-table-unit-price-${el.product_id}`
+                }
+              >
                 { product.price }
               </td>
-              <td>
-                { elem.quantity * product.price }
+              <td
+                data-testid={
+                  `seller_order_details__element-order-table-sub-total-${el.product_id}`
+                }
+              >
+                { el.quantity * product.price }
               </td>
             </tr>
           );
         })}
       </table>
+      <br />
+      <h2
+        data-testid="seller_order_details__element-order-total-price"
+      >
+        Total:
+        { requestInfo.total_price }
+      </h2>
       <button
         type="button"
         onClick={ () => clickHere() }
