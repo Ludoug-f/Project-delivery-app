@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 export default function Details({ setOrder, setCheck, detailInfo, requestInfo }) {
+  console.log('DETAILS: ', detailInfo, 'REQUEST: ', requestInfo);
   const [orderStatus, setOrderStatus] = useState(requestInfo.status);
   const clickHere = () => {
     setCheck(false);
@@ -61,8 +62,7 @@ export default function Details({ setOrder, setCheck, detailInfo, requestInfo })
           <td>Preço Unitário</td>
           <td>Sub-Total</td>
         </tr>
-        { detailInfo.map((elem) => (
-          // { elem.sale_id === requestInfo.user_id ?
+        { detailInfo.map((elem, index) => (
           <tr
             key={ elem.product_id }
           >
@@ -78,16 +78,16 @@ export default function Details({ setOrder, setCheck, detailInfo, requestInfo })
                 `seller_order_details__element-order-table-name-${elem.product_id}`
               }
             >
-              nome do produto
+              { elem.name }
             </td>
             <td>
-              Quantidade
+              { elem.quantity }
             </td>
             <td>
-              Preço
+              { elem.price }
             </td>
             <td>
-              SubTotal
+              { elem.quantity * elem.price }
             </td>
           </tr>
         ))}
