@@ -1,22 +1,31 @@
-/* eslint-disable react/prop-types */
-import React from 'react'; // , { useState }
+import React, { useState } from 'react'; // , { useState }
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+// import { useState } from 'react';
 // import { detailsMock } from '../salescomponents/Mocks';
 
 export default function Details({ setOrder, setCheck, detailInfo, requestInfo }) {
   console.log('sets: ', setOrder, setCheck, ' == details: ', detailInfo, requestInfo);
-  const [orderStatus, setOrderStatus] = useState('');
+  const [orderStatus, setOrderStatus] = useState(requestInfo.status);
   return (
     <div>
       Detalhes do Produto:
+      <p
+        data-testid="seller_order_details__element-order-details-label-delivery-status"
+      >
+        Pedido
+        { requestInfo.id }
+      </p>
+      { orderStatus === 'pendente'
+        ? <p>
+          Preparar pedido
+        </p>
+        : null}
       <p
         data-testid={
           `seller_order_details__element-order-details-label-order-${requestInfo.id}`
         }
       >
-        Pedido
-        { requestInfo.id }
+        { orderStatus }
       </p>
       { detailInfo.map((elem) => (
         <div
