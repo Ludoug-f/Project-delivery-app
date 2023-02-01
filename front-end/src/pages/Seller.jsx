@@ -30,7 +30,6 @@ export default function Seller() {
           Order={ Order }
           // requestInfo={ pedidosMock[Order] }
         /> }
-        { Check ? <p>OK</p> : <p>Not</p> }
       </div>
     </>
   );
