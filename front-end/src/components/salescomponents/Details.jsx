@@ -55,22 +55,23 @@ export default function Details({ setOrder, setCheck, detailInfo, requestInfo })
       ) : null }
       <table>
         <tr>
-          <td />
-          <td />
-          <td />
-          <td />
-          <td />
+          <td>Número</td>
+          <td>Nome</td>
+          <td>Quantidade</td>
+          <td>Preço Unitário</td>
+          <td>Sub-Total</td>
         </tr>
         { detailInfo.map((elem) => (
+          // { elem.sale_id === requestInfo.user_id ?
           <tr
             key={ elem.product_id }
           >
             <td
               data-testid={
-                `seller_order_details__element-order-table-item-number-${elem.product_id}`
+                `seller_order_details__element-order-table-item-number-${index + 1}`
               }
             >
-              { elem.product_id }
+              { index + 1 }
             </td>
             <td
               data-testid={
