@@ -6,6 +6,10 @@ import PropTypes from 'prop-types';
 export default function Details({ setOrder, setCheck, detailInfo, requestInfo }) {
   console.log('sets: ', setOrder, setCheck, ' == details: ', detailInfo, requestInfo);
   const [orderStatus, setOrderStatus] = useState(requestInfo.status);
+  const clickHere = () => {
+    setCheck(false);
+    setOrder('');
+  };
   return (
     <div>
       Detalhes do Produto:
@@ -72,6 +76,12 @@ export default function Details({ setOrder, setCheck, detailInfo, requestInfo })
           </p>
         </div>
       ))}
+      <button
+        type="button"
+        onClick={ () => clickHere() }
+      >
+        Voltar
+      </button>
     </div>
   );
 }

@@ -1,11 +1,9 @@
-/* eslint-disable react/prop-types */
 import React from 'react'; // , { useState }
 import PropTypes from 'prop-types';
 // import { setOrder, setCheck } from '../../pages/Seeler';
 // import { pedidosMock } from '../salescomponents/Mocks';
 
 export default function Requests({ setOrder, setCheck, requestList }) {
-  console.log(setOrder, setCheck, requestList);
   const clickHere = (el) => {
     setCheck(true);
     setOrder(el);
