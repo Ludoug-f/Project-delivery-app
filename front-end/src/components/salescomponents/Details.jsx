@@ -10,6 +10,7 @@ export default function Details({
   produtosMock,
 }) {
   console.log('DETAILS: ', detailInfo, 'REQUEST: ', requestList);
+  console.log('PRODUTOS: ', produtosMock);
   const requestInfo = requestList.find((elem) => elem.id === Order);
   const detailSelect = detailInfo.map((elem) => elem.sale_id === Order);
   const [orderStatus, setOrderStatus] = useState(requestInfo.status);
@@ -59,7 +60,7 @@ export default function Details({
           onClick={ () => setOrderStatus('entregue') }
         >
           <p>
-            Saiu para Entrega
+            Pedido foi Entregue
           </p>
         </button>
       ) : null }
