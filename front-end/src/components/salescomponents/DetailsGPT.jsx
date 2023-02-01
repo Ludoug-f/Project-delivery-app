@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-function Details({
+export default function DetailsGPT({
   setOrder,
   setCheck,
   detailInfo,
@@ -77,7 +77,7 @@ function Details({
     </div>
   );
 }
-Details.propTypes = {
+DetailsGPT.propTypes = {
   setOrder: PropTypes.func.isRequired,
   setCheck: PropTypes.func.isRequired,
   detailInfo: PropTypes.arrayOf({
