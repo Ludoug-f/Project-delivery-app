@@ -1,10 +1,7 @@
-import React, { useState } from 'react'; // , { useState }
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-// import { useState } from 'react';
-// import { detailsMock } from '../salescomponents/Mocks';
 
 export default function Details({ setOrder, setCheck, detailInfo, requestInfo }) {
-  console.log('sets: ', setOrder, setCheck, ' == details: ', detailInfo, requestInfo);
   const [orderStatus, setOrderStatus] = useState(requestInfo.status);
   const clickHere = () => {
     setCheck(false);

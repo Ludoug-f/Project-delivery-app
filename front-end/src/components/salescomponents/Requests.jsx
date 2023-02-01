@@ -1,7 +1,5 @@
-import React from 'react'; // , { useState }
+import React from 'react';
 import PropTypes from 'prop-types';
-// import { setOrder, setCheck } from '../../pages/Seeler';
-// import { pedidosMock } from '../salescomponents/Mocks';
 
 export default function Requests({ setOrder, setCheck, requestList }) {
   const clickHere = (el) => {
@@ -65,7 +63,7 @@ export default function Requests({ setOrder, setCheck, requestList }) {
   );
 }
 
-Request.propTypes = {
+Requests.propTypes = {
   setOrder: PropTypes.func.isRequired,
   setCheck: PropTypes.func.isRequired,
   requestList: PropTypes.arrayOf({
