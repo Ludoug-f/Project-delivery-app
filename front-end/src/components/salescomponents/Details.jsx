@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-export default function Details({ setOrder, setCheck, detailInfo, requestList, Order }) {
+export default function Details({
+  setOrder,
+  setCheck,
+  detailInfo,
+  requestList,
+  Order,
+  produtosMock,
+}) {
   console.log('DETAILS: ', detailInfo, 'REQUEST: ', requestList);
   const requestInfo = requestList.map((elem) => elem.id === Order);
   const detailSelect = detailInfo.map((elem) => elem.sale_id === Order);
@@ -75,21 +82,25 @@ export default function Details({ setOrder, setCheck, detailInfo, requestList, O
             >
               { index + 1 }
             </td>
+            {/* { produtosMock.map((item) => (item.id === elem.product_id) { */}
             <td
               data-testid={
                 `seller_order_details__element-order-table-name-${elem.product_id}`
               }
             >
-              { elem.name }
+              teste
+              { produtosMock[elem.product_id].name }
             </td>
             <td>
               { elem.quantity }
             </td>
             <td>
-              { elem.price }
+              test price
+              {/* { elem.price } */}
             </td>
             <td>
-              { elem.quantity * elem.price }
+              teste subtotal
+              {/* { elem.quantity * elem.price } */}
             </td>
           </tr>
         ))}
@@ -135,6 +146,14 @@ Details.propTypes = {
       sale_date: PropTypes.string.isRequired,
       status: PropTypes.string.isRequired,
     }),
+  }).isRequired,
+  produtosMock: PropTypes.arrayOf({
+    type: PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      price: PropTypes.number.isRequired,
+      url_image: PropTypes.string.isRequired,
+    }).isRequired,
   }).isRequired,
   Order: PropTypes.number.isRequired,
 };

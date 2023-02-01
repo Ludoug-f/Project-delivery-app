@@ -3,7 +3,11 @@ import NavBar from '../components/Navbar';
 import Requests from '../components/salescomponents/Requests';
 import Details from '../components/salescomponents/Details';
 // import '../styles/Seeler.css';
-import { pedidosMock, detailsMock } from '../components/salescomponents/Mocks';
+import {
+  pedidosMock,
+  detailsMock,
+  produtosMock,
+} from '../components/salescomponents/Mocks';
 
 export default function Seller() {
   const [Order, setOrder] = useState('');
@@ -25,21 +29,11 @@ export default function Seller() {
           setCheck={ setCheck }
           detailInfo={ detailsMock }
           requestList={ pedidosMock }
+          produtosMock={ produtosMock }
           Order={ Order }
           // requestInfo={ pedidosMock[Order] }
         /> }
         { Check ? <p>OK</p> : <p>Not</p> }
-        <button
-          type="button"
-          onClick={ () => setCheck(true) }
-        >
-          Mudar o Check
-        </button>
-        { Order }
-        <input
-          value={ Order }
-          onChange={ () => setOrder(target.value) }
-        />
       </div>
     </>
   );
