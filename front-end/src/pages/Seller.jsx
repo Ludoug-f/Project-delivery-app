@@ -1,8 +1,7 @@
-import React, { useState } from 'react'; // , { useContext }
+import React, { useState } from 'react';
 import NavBar from '../components/Navbar';
 import Requests from '../components/salescomponents/Requests';
 import Details from '../components/salescomponents/Details';
-// import '../styles/Seeler.css';
 import {
   pedidosMock,
   detailsMock,
@@ -19,12 +18,10 @@ export default function Seller() {
       <br />
       <div>
         { !Check ? <Requests
-          // props={ [setOrder, setCheck, pedidosMock] }
           setOrder={ setOrder }
           setCheck={ setCheck }
           requestList={ pedidosMock }
         /> : <Details
-          // props={ [setOrder, setCheck, detailsMock] }
           setOrder={ setOrder }
           setCheck={ setCheck }
           detailInfo={ detailsMock }

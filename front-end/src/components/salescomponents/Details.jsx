@@ -10,7 +10,7 @@ export default function Details({
   produtosMock,
 }) {
   console.log('DETAILS: ', detailInfo, 'REQUEST: ', requestList);
-  const requestInfo = requestList.map((elem) => elem.id === Order);
+  const requestInfo = requestList.find((elem) => elem.id === Order);
   const detailSelect = detailInfo.map((elem) => elem.sale_id === Order);
   const [orderStatus, setOrderStatus] = useState(requestInfo.status);
   const clickHere = () => {
@@ -89,10 +89,11 @@ export default function Details({
               }
             >
               teste
-              { produtosMock[elem.product_id].name }
+              {/* { produtosMock[elem.product_id].name } */}
             </td>
             <td>
-              { elem.quantity }
+              test quantidade
+              {/* { elem.quantity } */}
             </td>
             <td>
               test price
@@ -125,16 +126,6 @@ Details.propTypes = {
       quantity: PropTypes.number.isRequired,
     }),
   }).isRequired,
-  // requestInfo: PropTypes.shape({
-  //   id: PropTypes.number.isRequired,
-  //   user_id: PropTypes.number.isRequired,
-  //   seller_id: PropTypes.number.isRequired,
-  //   total_price: PropTypes.number.isRequired,
-  //   delivery_adress: PropTypes.string.isRequired,
-  //   delivery_number: PropTypes.string.isRequired,
-  //   sale_date: PropTypes.string.isRequired,
-  //   status: PropTypes.string.isRequired,
-  // }).isRequired,
   requestList: PropTypes.arrayOf({
     type: PropTypes.shape({
       id: PropTypes.number.isRequired,

@@ -1,4 +1,3 @@
-// export
 const pedidosMock = [
   {
     id: 1,
@@ -96,5 +95,4 @@ const produtosMock = [
   },
 ];
 
-// export default { pedidosMock, detailsMock };
 export { pedidosMock, detailsMock, produtosMock };
