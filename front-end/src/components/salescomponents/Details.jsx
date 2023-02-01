@@ -12,7 +12,7 @@ export default function Details({
   console.log('DETAILS: ', detailInfo, 'REQUEST: ', requestList);
   console.log('PRODUTOS: ', produtosMock);
   const requestInfo = requestList.find((elem) => elem.id === Order);
-  const detailSelect = detailInfo.map((elem) => elem.sale_id === Order);
+  const detailSelect = detailInfo.filter((elem) => elem.sale_id === Order);
   const [orderStatus, setOrderStatus] = useState(requestInfo.status);
   const clickHere = () => {
     setCheck(false);
@@ -72,40 +72,39 @@ export default function Details({
           <td>Preço Unitário</td>
           <td>Sub-Total</td>
         </tr>
-        { detailSelect.map((elem, index) => (
-          <tr
-            key={ elem.product_id }
-          >
-            <td
-              data-testid={
-                `seller_order_details__element-order-table-item-number-${index + 1}`
-              }
+        { detailSelect.map((elem, index) => {
+          const product = produtosMock.find((item) => item.id === elem.product_id);
+          return (
+            <tr
+              key={ elem.product_id }
             >
-              { index + 1 }
-            </td>
-            {/* { produtosMock.map((item) => (item.id === elem.product_id) { */}
-            <td
-              data-testid={
-                `seller_order_details__element-order-table-name-${elem.product_id}`
-              }
-            >
-              teste
-              {/* { produtosMock[elem.product_id].name } */}
-            </td>
-            <td>
-              test quantidade
-              {/* { elem.quantity } */}
-            </td>
-            <td>
-              test price
-              {/* { elem.price } */}
-            </td>
-            <td>
-              teste subtotal
-              {/* { elem.quantity * elem.price } */}
-            </td>
-          </tr>
-        ))}
+              <td
+                data-testid={
+                  `seller_order_details__element-order-table-item-number-${index + 1}`
+                }
+              >
+                { index + 1 }
+              </td>
+              {/* { produtosMock.map((item) => (item.id === elem.product_id) { */}
+              <td
+                data-testid={
+                  `seller_order_details__element-order-table-name-${elem.product_id}`
+                }
+              >
+                {product.name}
+              </td>
+              <td>
+                { elem.quantity }
+              </td>
+              <td>
+                { product.price }
+              </td>
+              <td>
+                { elem.quantity * product.price }
+              </td>
+            </tr>
+          );
+        })}
       </table>
       <button
         type="button"

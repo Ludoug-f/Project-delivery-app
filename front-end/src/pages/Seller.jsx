@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import NavBar from '../components/Navbar';
 import Requests from '../components/salescomponents/Requests';
-import DetailsGPT from '../components/salescomponents/DetailsGPT';
+import Details from '../components/salescomponents/Details';
 import {
   pedidosMock,
   detailsMock,
@@ -21,7 +21,7 @@ export default function Seller() {
           setOrder={ setOrder }
           setCheck={ setCheck }
           requestList={ pedidosMock }
-        /> : <DetailsGPT
+        /> : <Details
           setOrder={ setOrder }
           setCheck={ setCheck }
           detailInfo={ detailsMock }
