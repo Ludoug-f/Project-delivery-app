@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import NavBar from '../components/Navbar';
 import Requests from '../components/salescomponents/Requests';
-import Details from '../components/salescomponents/Details';
+import Details from '../components/salescomponents/DetailsGPT';
 import {
   pedidosMock,
   detailsMock,
