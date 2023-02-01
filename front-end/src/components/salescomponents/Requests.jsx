@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 // import { setOrder, setCheck } from '../../pages/Seeler';
 // import { pedidosMock } from '../salescomponents/Mocks';
 
-// eslint-disable-next-line react/prop-types
 export default function Requests({ setOrder, setCheck, requestList }) {
   // const { setOrder, setCheck, requestList } = PropTypes;
   console.log(setOrder, setCheck, requestList);
@@ -70,20 +69,20 @@ export default function Requests({ setOrder, setCheck, requestList }) {
 }
 
 Request.propTypes = {
-  children: PropTypes.shape({
-    setOrder: PropTypes.func.isRequired,
-    setCheck: PropTypes.func.isRequired,
-    requestList: PropTypes.arrayOf({
-      type: PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        user_id: PropTypes.number.isRequired,
-        seller_id: PropTypes.number.isRequired,
-        total_price: PropTypes.number.isRequired,
-        delivery_adress: PropTypes.string.isRequired,
-        delivery_number: PropTypes.string.isRequired,
-        sale_date: PropTypes.string.isRequired,
-        status: PropTypes.string.isRequired,
-      }),
-    }).isRequired,
+  // children: PropTypes.shape({
+  setOrder: PropTypes.func.isRequired,
+  setCheck: PropTypes.func.isRequired,
+  requestList: PropTypes.arrayOf({
+    type: PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      user_id: PropTypes.number.isRequired,
+      seller_id: PropTypes.number.isRequired,
+      total_price: PropTypes.number.isRequired,
+      delivery_adress: PropTypes.string.isRequired,
+      delivery_number: PropTypes.string.isRequired,
+      sale_date: PropTypes.string.isRequired,
+      status: PropTypes.string.isRequired,
+    }),
   }).isRequired,
+  // }).isRequired,
 };
