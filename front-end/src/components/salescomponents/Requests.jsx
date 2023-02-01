@@ -19,8 +19,8 @@ export default function Requests({ setOrder, setCheck, requestList }) {
       <br />
       <br />
       { requestList.map((elem) => (
-        // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-        <div
+        <button
+          type="button"
           key={ elem.id }
           onClick={ () => clickHere(elem.id) }
         >
@@ -62,7 +62,7 @@ export default function Requests({ setOrder, setCheck, requestList }) {
           </div>
           <br />
 
-        </div>
+        </button>
       )) }
     </div>
   );

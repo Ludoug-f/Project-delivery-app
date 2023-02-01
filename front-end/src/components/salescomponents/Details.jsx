@@ -3,6 +3,7 @@ import React from 'react'; // , { useState }
 import PropTypes from 'prop-types';
 // import { detailsMock } from '../salescomponents/Mocks';
 
+// eslint-disable-next-line react/prop-types
 export default function Details({ setOrder, setCheck, detailInfo, requestInfo }) {
   console.log('sets: ', setOrder, setCheck, ' == details: ', detailInfo, requestInfo);
   return (
