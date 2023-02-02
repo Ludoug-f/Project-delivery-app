@@ -5,26 +5,9 @@ function Admin() {
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const [userRole, setUserRole] = useState('vendedor');
-  const [registerButton, setRegisterButton] = useState(true);
-  const [userList, setUSerList] = useState([]);
-
-  // const validateButton = () => {
-  //   const condName = false;
-  //   const condEmail = false;
-  //   const condPassword = false;
-  //   const reg = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
-
-  //   if (userName.length >= TWELVE && userPassword.length >= SIX) {
-  //     condName = true;
-  //     condPassword = true;
-  //   }
-  //   if (reg.test(userEmail)) {
-  //     condEmail = true;
-  //   }
-  //   if (condName && condEmail && condPassword) {
-  //     return setRegisterButton(false);
-  //   }
-  // };
+  const [registerButton, setRegisterButton] = useState('');
+  const [userList, setUserList] = useState([]);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     const SIX = 6;
@@ -48,12 +31,31 @@ function Admin() {
       userPassword,
       userRole,
     };
-    setUSerList([...userList, newUser]);
+    setUserList([...userList, newUser]);
     setUserName('');
     setUserEmail('');
     setUserPassword('');
     setUserRole('vendedor');
-    setRegisterButton(false);
+    setRegisterButton('');
+    setError(false);
+  };
+
+  // const registerUserButtonClick = async (data) => {
+  // const registerVerify = await API
+  //   .fetchBody('/register', 'POST', { ...data });
+  // if (registerVerify.message === 'Data already exists') {
+  //   setError(true);
+  // } else {
+  // setUserList([...userList, data]);
+  // localStorage.setItem('user', JSON.stringify(data));
+  // const login = await API.fetchBody('/login', 'POST', data);
+  // if (login.role === 'customer') history.push('/customer/products');
+  // }
+  // };
+
+  const removeUsers = (index) => {
+    const updatedUsers = userList.filter((e, i) => i !== index);
+    setUserList([...updatedUsers]);
   };
 
   return (
@@ -77,9 +79,10 @@ function Admin() {
         </button>
       </header>
       <div>
-        <div>
-          Quadro de cadastro
-          <h2>Cadastrar novos usuários</h2>
+        {error
+        && <p data-testid="admin_manage__element-invalid-register">Erro no registro</p>}
+        <h2>Cadastrar novos usuários</h2>
+        <form>
           <input
             onChange={ ({ target }) => { setUserName(target.value); } }
             placeholder="Nome e sobrenome"
@@ -124,7 +127,7 @@ function Admin() {
           >
             Cadastrar
           </button>
-        </div>
+        </form>
       </div>
       <div>
         Quadro de lista de usuários
@@ -137,7 +140,7 @@ function Admin() {
               {index}
             </p>
             <p
-              data-testid={ `admin_manage__element-user-table-item-name-${index}` }
+              data-testid={ `admin_manage__element-user-table-name-${index}` }
             >
               {e.name}
             </p>
@@ -154,6 +157,7 @@ function Admin() {
             <button
               type="button"
               data-testid={ `admin_manage__element-user-table-remove-${index}` }
+              onClick={ () => removeUsers(index) }
             >
               Excluir
             </button>
