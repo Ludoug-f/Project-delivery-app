@@ -12,7 +12,6 @@ function App() {
   return (
     <Switch>
       <Route path="/customer/products">
-        <Route path="/admin/manage" component={ Admin } />
         <ProdProvider>
           <Products />
         </ProdProvider>

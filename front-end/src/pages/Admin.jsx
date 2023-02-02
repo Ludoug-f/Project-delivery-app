@@ -1,30 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
 
 function Admin() {
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const [userRole, setUserRole] = useState('vendedor');
-  const [registerButton, setRegisterButton] = useState(true);
+  const [registerButton, setRegisterButton] = useState('');
   const [userList, setUSerList] = useState([]);
-
-  // const validateButton = () => {
-  //   const condName = false;
-  //   const condEmail = false;
-  //   const condPassword = false;
-  //   const reg = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
-
-  //   if (userName.length >= TWELVE && userPassword.length >= SIX) {
-  //     condName = true;
-  //     condPassword = true;
-  //   }
-  //   if (reg.test(userEmail)) {
-  //     condEmail = true;
-  //   }
-  //   if (condName && condEmail && condPassword) {
-  //     return setRegisterButton(false);
-  //   }
-  // };
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     const SIX = 6;
@@ -40,20 +24,24 @@ function Admin() {
     }
   }, [userEmail, userPassword, userName]);
 
-  const registerUserButtonClick = (e) => {
-    e.preventDefault();
-    const newUser = {
-      userName,
-      userEmail,
-      userPassword,
-      userRole,
-    };
-    setUSerList([...userList, newUser]);
-    setUserName('');
-    setUserEmail('');
-    setUserPassword('');
-    setUserRole('vendedor');
-    setRegisterButton(false);
+  const { register, handleSubmit } = useForm();
+
+  const onClickSubmit = async (data) => {
+    // const registerVerify = await API
+    //   .fetchBody('/register', 'POST', { ...data });
+    // if (registerVerify.message === 'Data already exists') {
+    //   setError(true);
+    // } else {
+    setUSerList([...userList, data]);
+    localStorage.setItem('user', JSON.stringify(data));
+    // const login = await API.fetchBody('/login', 'POST', data);
+    // if (login.role === 'customer') history.push('/customer/products');
+    // }
+  };
+
+  const removeUsers = (index) => {
+    const updatedUsers = userList.filter((e, i) => i !== index);
+    setUSerList([...updatedUsers]);
   };
 
   return (
@@ -77,14 +65,16 @@ function Admin() {
         </button>
       </header>
       <div>
-        <div>
-          Quadro de cadastro
-          <h2>Cadastrar novos usuários</h2>
+        {error
+        && <p data-testid="admin_manage__element-invalid-register">Erro no registro</p>}
+        <h2>Cadastrar novos usuários</h2>
+        <form onSubmit={ handleSubmit(onClickSubmit) }>
           <input
             onChange={ ({ target }) => { setUserName(target.value); } }
             placeholder="Nome e sobrenome"
             type="text"
             id="name"
+            { ...register('name', { min: 12 }) }
             data-testid="admin_manage__input-name"
           />
           <input
@@ -92,17 +82,20 @@ function Admin() {
             id="email"
             placeholder="seu-email@site.com.br"
             type="email"
+            { ...register('email') }
             data-testid="admin_manage__input-email"
           />
           <input
             onChange={ ({ target }) => { setUserPassword(target.value); } }
             placeholder="************"
+            { ...register('password', { min: 6 }) }
             type="password"
             data-testid="admin_manage__input-password"
           />
           <select
             onChange={ ({ target }) => { setUserRole(target.value); } }
-            value={ userRole }
+            // value={ userRole }
+            { ...register('role') }
             data-testid="admin_manage__select-role"
           >
             <option
@@ -118,13 +111,12 @@ function Admin() {
           </select>
           <button
             type="submit"
-            disabled={ registerButton }
-            onClick={ registerUserButtonClick }
+            disabled={ false }
             data-testid="admin_manage__button-register"
           >
             Cadastrar
           </button>
-        </div>
+        </form>
       </div>
       <div>
         Quadro de lista de usuários
@@ -137,7 +129,7 @@ function Admin() {
               {index}
             </p>
             <p
-              data-testid={ `admin_manage__element-user-table-item-name-${index}` }
+              data-testid={ `admin_manage__element-user-table-name-${index}` }
             >
               {e.name}
             </p>
@@ -154,6 +146,7 @@ function Admin() {
             <button
               type="button"
               data-testid={ `admin_manage__element-user-table-remove-${index}` }
+              onClick={ () => removeUsers(index) }
             >
               Excluir
             </button>
