@@ -28,8 +28,7 @@ export default function Seller() {
           requestList={ pedidosMock }
           produtosMock={ produtosMock }
           Order={ Order }
-          oc="seller"
-          // requestInfo={ pedidosMock[Order] }
+          oc="client"
         /> }
       </div>
     </>

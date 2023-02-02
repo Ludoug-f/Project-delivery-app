@@ -8,6 +8,7 @@ export default function Details({
   requestList,
   Order,
   produtosMock,
+  oc,
 }) {
   console.log('DETAILS: ', detailInfo, 'REQUEST: ', requestList);
   console.log('PRODUTOS: ', produtosMock);
@@ -39,7 +40,7 @@ export default function Details({
       >
         { orderStatus }
       </p>
-      { orderStatus === 'pendente' ? (
+      { orderStatus === 'pendente' && oc === 'seller' ? (
         <button
           type="button"
           onClick={ () => setOrderStatus('preparando') }
@@ -50,7 +51,7 @@ export default function Details({
           </p>
         </button>
       ) : null }
-      { orderStatus === 'pendente' || orderStatus === 'preparando' ? (
+      { orderStatus === 'preparando' && oc === 'seller' ? (
         <button
           type="button"
           onClick={ () => setOrderStatus('saiu') }
@@ -61,7 +62,7 @@ export default function Details({
           </p>
         </button>
       ) : null }
-      { orderStatus === 'saiu' || orderStatus === 'preparando' ? (
+      { orderStatus === 'saiu' && oc === 'client' ? (
         <button
           type="button"
           onClick={ () => setOrderStatus('entregue') }
@@ -172,4 +173,5 @@ Details.propTypes = {
     }).isRequired,
   }).isRequired,
   Order: PropTypes.number.isRequired,
+  oc: PropTypes.string.isRequired,
 };

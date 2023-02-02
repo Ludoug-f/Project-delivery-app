@@ -19,11 +19,7 @@ export default function Requests({ setOrder, setCheck, requestList }) {
           key={ elem.id }
           onClick={ () => clickHere(elem.id) }
         >
-          <div
-            // data-testid={ `seller_order__element-order-id-${elem.id}` }
-            // display="flex"
-            className="pedido"
-          >
+          <div>
             Pedido
             <p
               data-testid={ `seller_order__element-order-id-${elem.id}` }

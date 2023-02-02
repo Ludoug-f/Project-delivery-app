@@ -16,7 +16,8 @@ function App() {
         </ProdProvider>
       </Route>
       <Route path="/register" component={ Register } />
-      <Route path="/seller" component={ Seller } />
+      <Route path="/seller/orders" component={ Seller } />
+      {/* <Route path="/customer/orders" component={ Customer } /> */}
       <Route path="/" component={ Login } />
     </Switch>
   );
