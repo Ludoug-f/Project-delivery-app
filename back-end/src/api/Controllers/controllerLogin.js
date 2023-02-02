@@ -1,6 +1,5 @@
 const serviceLogin = require('../Services/serviceLogin');
 const Auth = require('../Services/auth/authLogin');
-
   // Verify if email and password are provided in the request body
   const ctrlLogin = async (req, res) => { 
     const response = await serviceLogin.login(req.body);
@@ -10,7 +9,6 @@ const Auth = require('../Services/auth/authLogin');
 
     return res.status(200).json(response);
   };
-
 
   const createAdmUser = async (req, res) => {
     const { authorization } = req.headers;

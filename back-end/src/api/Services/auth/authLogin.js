@@ -1,7 +1,8 @@
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
 require('dotenv');
-const JWTPASS = process.env.NODE_ENV || 'JWTPASS'
+
+const JWTPASS = process.env.NODE_ENV || 'JWTPASS';
 // Token for Validation on Login
   const secret = fs.readFileSync('./jwt.evaluation.key', 'utf-8');
   const TokenCreation = (id) => jwt.sign(id, secret);
@@ -33,4 +34,3 @@ const JWTPASS = process.env.NODE_ENV || 'JWTPASS'
   };
 
 module.exports = { TokenCreation, LoginToken, TokenValidation, TokenDecoder, validateToken };
-
