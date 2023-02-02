@@ -9,7 +9,7 @@ export default function Login() {
   const [error, setError] = useState(false);
   const [Email, setEmail] = useState('');
   const [Password, setPassword] = useState('');
-  const [Button, setButton] = useState('');
+  const [Button, setButton] = useState(true);
 
   useEffect(() => {
     if (history.location.pathname === '/') history.push('/login'); // Verify if the user is logged in
@@ -79,6 +79,7 @@ export default function Login() {
           disabled={ Button }
         >
           Login
+          {/* { Button ? <p>Y</p> : <p>N</p> } */}
         </button>
         <Link
           to="/register"
