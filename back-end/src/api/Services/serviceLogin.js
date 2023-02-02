@@ -26,6 +26,38 @@ const Auth = require('./auth/authLogin');
     return undefined;
   };
 
+  /* const verifyAdmToken = async (email) => {
+    const user = await User.findOne({ where: { email } });
+    if (user) { 
+      const passwordMd5 = md5(password);
+      const correct = passwordMd5 === user.password;
+    
+      if
+    }
+  } */
+
+  const admToken = async (user, authorization) => {
+    // const token = Auth.createToken(user);
+    // console.log(token);
+    // console.log(user);
+    const teste = await Auth.validateToken(authorization);
+    console.log(teste);
+    try {
+      const userAdm = await User.findOne({ where: { email: teste } });
+      // console.log(userAdm);
+      if (userAdm.role !== 'administrator' || !authorization) {
+        return { message: 'Unauthorized' };
+      }
+      const createUser = await User.create({ name: user.name,
+        email: user.email, 
+        role: user.role,
+        password: user.password });
+      return { type: 201, message: createUser }; 
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const newUser = async (user) => {
     const { name, email, role } = user;
   
@@ -38,6 +70,14 @@ const Auth = require('./auth/authLogin');
     return { message: createUser };
   };
 
+  /* const newAdmUser = async (user, token) => {
+    const { name, email, role } = user;
+    await admToken(token)
+    const createUser = await User.create({ name, email, role });
+
+    return { type: 201, message: createUser };
+  }; */
+
   const findByEmail = async (email) => {
     const user = await User.findOne({ where: { email } });
   
@@ -47,11 +87,7 @@ const Auth = require('./auth/authLogin');
   const findByName = async (name) => {
     const user = await User.findOne({ where: { name } });
   
-    if (!user) {
-      return { type: 400, message: 'Name not found' };
-    }
-  
-    return { type: null, message: user };
+    return user;
   };
 
-  module.exports = { login, newUser, findByEmail, findByName };
+  module.exports = { login, newUser, findByEmail, findByName, admToken };

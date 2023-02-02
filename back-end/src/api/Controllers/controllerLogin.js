@@ -1,6 +1,5 @@
 const serviceLogin = require('../Services/serviceLogin');
 const Auth = require('../Services/auth/authLogin');
-
   // Verify if email and password are provided in the request body
   const ctrlLogin = async (req, res) => { 
     const response = await serviceLogin.login(req.body);
@@ -11,6 +10,27 @@ const Auth = require('../Services/auth/authLogin');
     return res.status(200).json(response);
   };
 
+  const createAdmUser = async (req, res) => {
+    const { authorization } = req.headers;
+    const { name, email, role, password } = req.body;
+
+    const existingEmail = await serviceLogin.findByEmail(email);
+    const existingName = await serviceLogin.findByName(name);
+
+    const newUser = await serviceLogin.admToken({ name, email, role, password }, authorization);
+  
+    if (existingEmail) {
+      return res.status(409).json({ message: 'Eamil already exists' });
+    }  
+
+    if (existingName) {
+      return res.status(409).json({ message: 'Name already exists' });
+    }
+  
+    if (newUser) {
+      return res.status(201).json(newUser);
+    }
+  };
   // Verify if token is provided in the request body
   const ctrlToken = async (req, res) => {
     const { token } = req.body;
@@ -41,4 +61,4 @@ return res.status(401).json({ message: 'Invalid Token' });
   //   }
   // };
 
-  module.exports = { ctrlLogin, ctrlToken };
+  module.exports = { ctrlLogin, ctrlToken, createAdmUser };
