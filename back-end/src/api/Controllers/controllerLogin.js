@@ -1,4 +1,5 @@
 const serviceLogin = require('../Services/serviceLogin');
+const Auth = require('../Services/auth/authLogin');
 
   // Verify if email and password are provided in the request body
   const ctrlLogin = async (req, res) => { 
@@ -10,26 +11,6 @@ const serviceLogin = require('../Services/serviceLogin');
     return res.status(200).json(response);
   };
 
- const createUser = async (req, res) => {
-    const { name, email, role } = req.body;
-  
-    const existingEmail = await serviceLogin.findByEmail(email);
-    const existingName = await serviceLogin.findByName(name);
-
-    const newUser = await serviceLogin.newUser({ name, email, role });
-  
-    if (existingEmail) {
-      return res.status(409).json({ message: 'Eamil already exists' });
-    }  
-
-    if (existingName) {
-      return res.status(409).json({ message: 'Name already exists' });
-    }
-  
-    if (newUser) {
-      return res.status(201).json(newUser);
-    }
-  };
 
   const createAdmUser = async (req, res) => {
     const { authorization } = req.headers;
@@ -52,4 +33,34 @@ const serviceLogin = require('../Services/serviceLogin');
       return res.status(201).json(newUser);
     }
   };
-  module.exports = { ctrlLogin, createUser, createAdmUser };
+  // Verify if token is provided in the request body
+  const ctrlToken = async (req, res) => {
+    const { token } = req.body;
+const response = Auth.TokenValidation(token);
+if (response) return res.status(200).json({ message: 'Valid Token' });
+return res.status(401).json({ message: 'Invalid Token' });
+  };
+
+//  const createUser = async (req, res) => {
+//     const { name, email, role } = req.body;
+  
+//     const existingEmail = await serviceLogin.findByEmail(email);
+
+//     const newUser = await serviceLogin.newUser({ name, email, role });
+  
+//     if (existingEmail) {
+//       return res.status(409).json({ message: 'Email already exists' });
+//     } else 
+    
+    // const existingName = await serviceLogin.findByName(name);
+
+    // if (existingName) {
+    //   return res.status(409).json({ message: 'Name already exists' });
+    // }
+  
+  //   if (newUser) {
+  //     return res.status(201).json(newUser);
+  //   }
+  // };
+
+  module.exports = { ctrlLogin, ctrlToken, createAdmUser };

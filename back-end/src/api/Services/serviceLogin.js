@@ -17,7 +17,7 @@ const Auth = require('./auth/authLogin');
  return {
         name: user.name,
         email,
-        token: Auth.createToken(email),
+        token: Auth.TokenCreation(user.id),
         role: user.role,
       }; 
 }
@@ -66,7 +66,7 @@ const Auth = require('./auth/authLogin');
     const createUser = await User.create({ name, email, role });
     //  rever logica if
     // if(newUser) return { type: '400', message: 'User already exits' }
-    return { type: 201, message: createUser };
+    return { message: createUser };
   };
 
   /* const newAdmUser = async (user, token) => {
