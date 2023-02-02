@@ -39,17 +39,17 @@ function Checkout() {
       const sellersResponse = await axios.get('http://localhost:3001/sellers');
       setSellers(sellersResponse.data);
       setValue('seller', sellersResponse.data[0].id);
-    } catch (e) {
-      console.log(e);
+    } catch (err) {
+      console.log(err);
     }
 
     const cartLocalStorage = JSON.parse(localStorage.getItem('cart'));
 
     if (cartLocalStorage) { // Filter products with quantity 0
-      const filteredArray = cartLocalStorage
+      const filterArray = cartLocalStorage
         .filter((product) => product.quantity !== 0);
 
-      setProducts(filteredArray);
+      setProducts(filterArray);
     }
     calculateCart();
     setLoading(false);
@@ -57,10 +57,10 @@ function Checkout() {
 
   // Remove item from cart
   const removeItem = (item) => {
-    const filteredArray = products
+    const filterArray = products
       .filter((product) => product.id !== item.id);
-    setProducts(filteredArray);
-    localStorage.setItem('cart', JSON.stringify(filteredArray));
+    setProducts(filterArray);
+    localStorage.setItem('cart', JSON.stringify(filterArray));
 
     calculateCart();
   };
@@ -73,21 +73,19 @@ function Checkout() {
     calculateCart();
   }, [products]);
 
-  const closeOrder = async ({ address, number, seller,
-  }) => {
+  const closeOrder = async ({ address, number, seller }) => {
     const user = JSON.parse(localStorage.getItem('user'));
     const saleBody = {
       token: user.token,
       sale: {
-        seller_id: seller,
-        total_price: total,
-        delivery_address: address,
-        delivery_number: number,
-        sale_date: new Date(),
+        sellerId: seller,
+        totalPrice: total,
+        deliveryAddress: address,
+        deliveryNumber: number,
+        saleDate: new Date(),
         status: 'Pendente',
       },
-      // products: products.map(({ id: product_id, quantity,
-      // }) => ({ product_id, quantity })),
+      products: products.map(({ id: productId, quantity }) => ({ productId, quantity })),
     };
 
     const { data: { id } } = await axios.post('http://localhost:3001/sales', saleBody, { headers: { authorization: user.token } });
