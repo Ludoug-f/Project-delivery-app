@@ -31,9 +31,9 @@ module.exports = {
           },
         total_price: {
             allowNull: false,
-            type: Sequelize.DECIMAL(9, 2),
-          },
-        delivery_adress: {
+            type: Sequelize.DECIMAL(10, 2),
+        },
+        delivery_address: {
             allowNull: false,
             type: Sequelize.STRING,
         },
@@ -44,7 +44,6 @@ module.exports = {
         sale_date: {
             allowNull: false,
             type: Sequelize.DATE,
-            defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
         },
         status: {
             allowNull: false,

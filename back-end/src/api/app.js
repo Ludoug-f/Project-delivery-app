@@ -14,11 +14,13 @@ app.use(cors());
 
 app.get('/coffee', (_req, res) => res.status(418).end());
 // app.use(routerSales);
-app.use(routerProducts);
 app.use('/images', express.static(path.join(__dirname, '..', '..', 'public')));
 app.use('/login', route.routerLogin);
 app.use('/register', route.routerRegister);
+app.use('/sales', route.routerSales);
+
 app.use(routerRegister);
 app.use(routerUser);
+app.use(routerProducts);
 
 module.exports = app;

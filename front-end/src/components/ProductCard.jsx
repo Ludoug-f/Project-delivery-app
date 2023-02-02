@@ -28,7 +28,7 @@ function ProductCard() { // Function that renders the products page
             {/*  */}
             <img
               data-testid={ `customer_products__img-card-bg-image-${product.id}` }
-              src={ product.url_image }
+              src={ product.urlImage }
               alt="Imagem do Produto"
               srcSet=""
               width={ 100 }
