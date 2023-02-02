@@ -62,8 +62,9 @@ const Auth = require('./auth/authLogin');
     const { name, email, role } = user;
   
     // const passwordMd5 = md5(password);
-  
+    
     const createUser = await User.create({ name, email, role });
+    if (createUser) return { type: '400', message: 'User already exits' };
     //  rever logica if
     // if(newUser) return { type: '400', message: 'User already exits' }
     return { message: createUser };
