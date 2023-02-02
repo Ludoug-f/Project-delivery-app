@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useForm } from 'react-hook-form';
 
 function Admin() {
   const [userName, setUserName] = useState('');
@@ -7,7 +6,7 @@ function Admin() {
   const [userPassword, setUserPassword] = useState('');
   const [userRole, setUserRole] = useState('vendedor');
   const [registerButton, setRegisterButton] = useState('');
-  const [userList, setUSerList] = useState([]);
+  const [userList, setUserList] = useState([]);
   const [error, setError] = useState(false);
 
   useEffect(() => {
@@ -24,24 +23,39 @@ function Admin() {
     }
   }, [userEmail, userPassword, userName]);
 
-  const { register, handleSubmit } = useForm();
-
-  const onClickSubmit = async (data) => {
-    // const registerVerify = await API
-    //   .fetchBody('/register', 'POST', { ...data });
-    // if (registerVerify.message === 'Data already exists') {
-    //   setError(true);
-    // } else {
-    setUSerList([...userList, data]);
-    localStorage.setItem('user', JSON.stringify(data));
-    // const login = await API.fetchBody('/login', 'POST', data);
-    // if (login.role === 'customer') history.push('/customer/products');
-    // }
+  const registerUserButtonClick = (e) => {
+    e.preventDefault();
+    const newUser = {
+      userName,
+      userEmail,
+      userPassword,
+      userRole,
+    };
+    setUserList([...userList, newUser]);
+    setUserName('');
+    setUserEmail('');
+    setUserPassword('');
+    setUserRole('vendedor');
+    setRegisterButton('');
+    setError(false);
   };
+
+  // const registerUserButtonClick = async (data) => {
+  // const registerVerify = await API
+  //   .fetchBody('/register', 'POST', { ...data });
+  // if (registerVerify.message === 'Data already exists') {
+  //   setError(true);
+  // } else {
+  // setUserList([...userList, data]);
+  // localStorage.setItem('user', JSON.stringify(data));
+  // const login = await API.fetchBody('/login', 'POST', data);
+  // if (login.role === 'customer') history.push('/customer/products');
+  // }
+  // };
 
   const removeUsers = (index) => {
     const updatedUsers = userList.filter((e, i) => i !== index);
-    setUSerList([...updatedUsers]);
+    setUserList([...updatedUsers]);
   };
 
   return (
@@ -68,13 +82,12 @@ function Admin() {
         {error
         && <p data-testid="admin_manage__element-invalid-register">Erro no registro</p>}
         <h2>Cadastrar novos usuários</h2>
-        <form onSubmit={ handleSubmit(onClickSubmit) }>
+        <form>
           <input
             onChange={ ({ target }) => { setUserName(target.value); } }
             placeholder="Nome e sobrenome"
             type="text"
             id="name"
-            { ...register('name', { min: 12 }) }
             data-testid="admin_manage__input-name"
           />
           <input
@@ -82,20 +95,17 @@ function Admin() {
             id="email"
             placeholder="seu-email@site.com.br"
             type="email"
-            { ...register('email') }
             data-testid="admin_manage__input-email"
           />
           <input
             onChange={ ({ target }) => { setUserPassword(target.value); } }
             placeholder="************"
-            { ...register('password', { min: 6 }) }
             type="password"
             data-testid="admin_manage__input-password"
           />
           <select
             onChange={ ({ target }) => { setUserRole(target.value); } }
-            // value={ userRole }
-            { ...register('role') }
+            value={ userRole }
             data-testid="admin_manage__select-role"
           >
             <option
@@ -111,7 +121,8 @@ function Admin() {
           </select>
           <button
             type="submit"
-            disabled={ false }
+            disabled={ registerButton }
+            onClick={ registerUserButtonClick }
             data-testid="admin_manage__button-register"
           >
             Cadastrar
