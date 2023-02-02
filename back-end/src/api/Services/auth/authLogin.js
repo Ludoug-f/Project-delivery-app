@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
 require('dotenv');
-
+const JWTPASS = process.env.NODE_ENV || 'JWTPASS'
 // Token for Validation on Login
   const secret = fs.readFileSync('./jwt.evaluation.key', 'utf-8');
   const TokenCreation = (id) => jwt.sign(id, secret);
@@ -24,22 +24,12 @@ require('dotenv');
       return undefined;
     }
   };
-
-<<<<<<< HEAD
-  /* const checkToken = (authorization) => {
-    if (!authorization) {
-      return {message: 'Need a valid token'}
-    }
-  }; */
   
   const validateToken = (token) => {
     const data = jwt.verify(token, JWTPASS);
-    // checkToken(token);
     console.log(data);
     return data;
   };
 
-module.exports = { createToken, validateToken };
-=======
-module.exports = { TokenCreation, LoginToken, TokenValidation, TokenDecoder };
->>>>>>> main-group-14-main
+module.exports = { TokenCreation, LoginToken, TokenValidation, TokenDecoder, validateToken };
+
