@@ -66,6 +66,7 @@ export default function Details({
         <button
           type="button"
           onClick={ () => setOrderStatus('entregue') }
+          data-testid="customer_order_details__button-delivery-check"
         >
           <p>
             Pedido foi Entregue
