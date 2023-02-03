@@ -1,10 +1,8 @@
-import axios from 'axios';
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import NavBar from '../components/Navbar';
-// import API from '../utils/API';
-import '../styles/Checkout.css';
 
 function Checkout() {
   const [products, setProducts] = useState([]);
@@ -16,7 +14,7 @@ function Checkout() {
 
   const history = useHistory();
 
-  const calculateCart = () => { // Calculate total price
+  const calculateTotal = () => {
     let sum = 0;
     products.map((item) => {
       sum += item.quantity * item.price;
@@ -26,51 +24,42 @@ function Checkout() {
     setTotal(sum);
   };
 
-  // // Get sellers from API
-  // const getSellers = async () => {
-  //   const data = await API.GetSellers();
-  //   setSellers(data);
-  //   setValue('seller', data[0].id);
-  // };
-
-  // Fetch sellers
-  const fetchSeller = async () => {
+  const fetchData = async () => {
     try {
-      const sellersResponse = await axios.get('http://localhost:3001/sellers');
+      const sellersResponse = await axios.get('http://localhost:3001/users/sellers');
       setSellers(sellersResponse.data);
       setValue('seller', sellersResponse.data[0].id);
-    } catch (err) {
-      console.log(err);
+    } catch (e) {
+      console.log(e);
     }
 
-    const cartLocalStorage = JSON.parse(localStorage.getItem('cart'));
+    const productsLocalStorage = JSON.parse(localStorage.getItem('cart'));
 
-    if (cartLocalStorage) { // Filter products with quantity 0
-      const filterArray = cartLocalStorage
+    if (productsLocalStorage) {
+      const filteredArray = productsLocalStorage
         .filter((product) => product.quantity !== 0);
 
-      setProducts(filterArray);
+      setProducts(filteredArray);
     }
-    calculateCart();
+    calculateTotal();
     setLoading(false);
   };
 
-  // Remove item from cart
   const removeItem = (item) => {
-    const filterArray = products
+    const filteredArray = products
       .filter((product) => product.id !== item.id);
-    setProducts(filterArray);
-    localStorage.setItem('cart', JSON.stringify(filterArray));
+    setProducts(filteredArray);
+    localStorage.setItem('cart', JSON.stringify(filteredArray));
 
-    calculateCart();
+    calculateTotal();
   };
 
   useEffect(() => {
-    fetchSeller();
+    fetchData();
   }, []);
 
   useEffect(() => {
-    calculateCart();
+    calculateTotal();
   }, [products]);
 
   const closeOrder = async ({ address, number, seller }) => {
@@ -93,8 +82,7 @@ function Checkout() {
   };
 
   return (
-    <div className="Checkout-body">
-
+    <div>
       {
         NavBar()
       }
@@ -107,7 +95,7 @@ function Checkout() {
             Carregando...
           </div>
         ) : (
-          <table className="Order">
+          <table>
             <thead>
               <tr>
                 <th>Item</th>
@@ -186,9 +174,9 @@ function Checkout() {
       <form onSubmit={ handleSubmit(closeOrder) }>
         <label htmlFor="sellers">
           <select
-            data-testid="customer_checkout__select-seller"
             name="sellers"
             id="sellers"
+            data-testid="customer_checkout__select-seller"
             { ...register('seller') }
           >
             {
@@ -201,26 +189,26 @@ function Checkout() {
         <label htmlFor="address">
           Endereço
           <input
-            data-testid="customer_checkout__input-address"
             type="text"
             id="address"
-            placeholder="Travessa Terceira da Castanheira, Bairro Muruci"
+            placeholder="Travessa Terceira, Bairro Muruci"
+            data-testid="customer_checkout__input-address"
             { ...register('address') }
           />
         </label>
         <label htmlFor="number">
           Número
           <input
-            data-testid="customer_checkout__input-address-number"
             type="text"
             id="number"
             placeholder="198"
+            data-testid="customer_checkout__input-address-number"
             { ...register('number') }
           />
         </label>
         <button
-          data-testid="customer_checkout__button-submit-order"
           type="submit"
+          data-testid="customer_checkout__button-submit-order"
         >
           Finalizar Pedido
         </button>

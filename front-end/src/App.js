@@ -8,6 +8,8 @@ import Products from './pages/Products';
 import Seller from './pages/Seller';
 import ProdProvider from './components/ProdContext/Provider';
 import Admin from './pages/Admin';
+import Details from './pages/Details';
+import Customer from './pages/Customer';
 
 function App() {
   return (
@@ -18,10 +20,12 @@ function App() {
         </ProdProvider>
       </Route>
       <Route path="/customer/checkout" component={ Checkout } />
+      <Route path="/customer/orders/:id" component={ Details } />
+      <Route path="/customer/orders" component={ Customer } />
+
       <Route path="/admin/manage" component={ Admin } />
       <Route path="/register" component={ Register } />
       <Route path="/seller/orders" component={ Seller } />
-      {/* <Route path="/customer/orders" component={ Customer } /> */}
       <Route path="/" component={ Login } />
     </Switch>
   );

@@ -1,36 +1,31 @@
-import React, { useState } from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import NavBar from '../components/Navbar';
-import Requests from '../components/salescomponents/Requests';
-import Details from '../components/salescomponents/Details';
-import {
-  pedidosMock,
-  detailsMock,
-  produtosMock,
-} from '../components/salescomponents/Mocks';
+import CardOrder from '../components/CardOrder';
 
-export default function Seller() {
-  const [Order, setOrder] = useState('');
-  const [Check, setCheck] = useState(false);
+function CustomerPage() {
+  const [sales, setSales] = useState([]);
+
+  const fetchSales = async () => {
+    const { email } = JSON.parse(localStorage.getItem('user'));
+    const response = await axios.get(`http://localhost:3001/sales/user/${email}`);
+    setSales(response.data);
+  };
+
+  useEffect(() => {
+    fetchSales();
+  }, []);
 
   return (
-    <>
+    <div>
       <NavBar />
-      <br />
-      <div>
-        { !Check ? <Requests
-          setOrder={ setOrder }
-          setCheck={ setCheck }
-          requestList={ pedidosMock }
-        /> : <Details
-          setOrder={ setOrder }
-          setCheck={ setCheck }
-          detailInfo={ detailsMock }
-          requestList={ pedidosMock }
-          produtosMock={ produtosMock }
-          Order={ Order }
-          oc="client"
-        /> }
-      </div>
-    </>
+      {
+        sales ? sales.map((sale) => (<CardOrder sale={ sale } key={ sale.id } />))
+          : <div>Carregando...</div>
+      }
+
+    </div>
   );
 }
+
+export default CustomerPage;
