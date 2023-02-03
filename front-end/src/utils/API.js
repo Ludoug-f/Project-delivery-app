@@ -36,13 +36,4 @@ const GetSellers = async () => {
   return response;
 };
 
-const CreateUser = async () => {
-  const response = fetch('http://localhost:3001/admin/manage', {
-    method: 'POST',
-  })
-    .then((req) => req.json());
-
-  return response;
-};
-
-export default { fetchBody, fetchBodyless, GetProducts, GetSellers, CreateUser };
+export default { fetchBody, fetchBodyless, GetProducts, GetSellers };

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import axios from 'axios';
 import NavBar from '../components/Navbar';
-import API from '../utils/API';
 
 function Admin() {
   const [userName, setUserName] = useState('');
@@ -9,7 +9,6 @@ function Admin() {
   const [userPassword, setUserPassword] = useState('');
   const [userRole, setUserRole] = useState('vendedor');
   const [registerButton, setRegisterButton] = useState('');
-  const [userList, setUserList] = useState([]);
   const [error, setError] = useState(false);
 
   useEffect(() => {
@@ -30,16 +29,36 @@ function Admin() {
 
   const onClickSubmit = async (data) => {
     console.log(data);
-    const registerVerify = await API
-      .fetchBody('/register', 'POST', { ...data });
-    if (registerVerify.message === 'Data already exists') {
+    try {
+      await axios.post('http://localhost:3001/admin/manage', {
+        userName,
+        userEmail,
+        userPassword,
+        userRole,
+      });
+      setError(false);
+      console.log(userList, userRole, userEmail);
+    } catch (err) {
       setError(true);
-    } else {
-      const createUser = await API.fetchBody('/admin/manage', 'POST', data);
-      localStorage.setItem('user', JSON.stringify(createUser));
-      setUserList(createUser);
     }
   };
+
+  // const onClickSubmit = async () => {
+  //   try {
+  //     await axios.post('http://localhost:3001/admin/manage', {
+  //       userName,
+  //       userEmail,
+  //       userPassword,
+  //       userRole,
+  //     });
+  //     getUserList();
+  //     setError(false);
+  //     console.log(userList);
+  //   } catch (err) {
+  //     console.log(err);
+  //     setError(true);
+  //   }
+  // };
 
   return (
     <div>
@@ -112,9 +131,8 @@ function Admin() {
         </form>
       </div>
       <div>
-        Quadro de lista de usuários
         <h1>Quadro de usuários</h1>
-        { userList.map((e, index) => (
+        {/* { userList.map((e, index) => (
           <div key={ index }>
             <p
               data-testid={ `admin_manage__element-user-table-item-number-${index}` }
@@ -143,7 +161,7 @@ function Admin() {
               Excluir
             </button>
           </div>
-        ))}
+        ))} */}
       </div>
     </div>
   );
