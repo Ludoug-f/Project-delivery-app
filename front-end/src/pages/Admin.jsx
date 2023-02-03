@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import NavBar from '../components/Navbar';
-// import API from '../utils/API';
+import API from '../utils/API';
 
 function Admin() {
   const [userName, setUserName] = useState('');
@@ -25,35 +26,20 @@ function Admin() {
     }
   }, [userEmail, userPassword, userName]);
 
-  const registerUserButtonClick = (e) => {
-    e.preventDefault();
-    const newUser = {
-      userName,
-      userEmail,
-      userPassword,
-      userRole,
-    };
-    setUserList([...userList, newUser]);
-    setUserName('');
-    setUserEmail('');
-    setUserPassword('');
-    setUserRole('vendedor');
-    setRegisterButton('');
-    setError(false);
-  };
+  const { register, handleSubmit } = useForm();
 
-  // const registerUserButtonClick = async (data) => {
-  // const registerVerify = await API
-  //   .fetchBody('/register', 'POST', { ...data });
-  // if (registerVerify.message === 'Data already exists') {
-  //   setError(true);
-  // } else {
-  // setUserList([...userList, data]);
-  // localStorage.setItem('user', JSON.stringify(data));
-  // const login = await API.fetchBody('/login', 'POST', data);
-  // if (login.role === 'customer') history.push('/customer/products');
-  // }
-  // };
+  const onClickSubmit = async (data) => {
+    console.log(data);
+    const registerVerify = await API
+      .fetchBody('/register', 'POST', { ...data });
+    if (registerVerify.message === 'Data already exists') {
+      setError(true);
+    } else {
+      const createUser = await API.fetchBody('/admin/manage', 'POST', data);
+      localStorage.setItem('user', JSON.stringify(createUser));
+      setUserList(createUser);
+    }
+  };
 
   return (
     <div>
@@ -64,50 +50,64 @@ function Admin() {
         {error
         && <p data-testid="admin_manage__element-invalid-register">Erro no registro</p>}
         <h2>Cadastrar novos usuários</h2>
-        <form>
+        <form className="register" onSubmit={ handleSubmit(onClickSubmit) }>
           <input
-            onChange={ ({ target }) => { setUserName(target.value); } }
-            placeholder="Nome e sobrenome"
-            type="text"
-            id="name"
             data-testid="admin_manage__input-name"
+            type="text"
+            placeholder="Nome e sobrenome"
+            id="name"
+            { ...register('name', { min: 12 }) }
+            onChange={ ({ target }) => {
+              setUserName(target.value);
+            } }
           />
+
           <input
-            onChange={ ({ target }) => { setUserEmail(target.value); } }
-            id="email"
-            placeholder="seu-email@site.com.br"
-            type="email"
             data-testid="admin_manage__input-email"
+            type="email"
+            placeholder="seu-email@site.com.br"
+            id="email"
+            { ...register('email') }
+            onChange={ ({ target }) => {
+              setUserEmail(target.value);
+            } }
           />
+
           <input
-            onChange={ ({ target }) => { setUserPassword(target.value); } }
-            placeholder="************"
-            type="password"
             data-testid="admin_manage__input-password"
+            type="password"
+            placeholder="************"
+            id="password"
+            { ...register('password', { min: 6 }) }
+            onChange={ ({ target }) => {
+              setUserPassword(target.value);
+            } }
           />
+
           <select
-            onChange={ ({ target }) => { setUserRole(target.value); } }
-            value={ userRole }
+            { ...register('role') }
+            onChange={ ({ target }) => {
+              setUserRole(target.value);
+            } }
             data-testid="admin_manage__select-role"
           >
             <option
-              value="vendedor"
+              value="seeler"
             >
-              vendedor
+              Vendedor
             </option>
             <option
-              value="usuário"
+              value="customer"
             >
-              usuário
+              Usuário
             </option>
           </select>
           <button
+            data-testid="admin_manage__button-register"
             type="submit"
             disabled={ registerButton }
-            onClick={ registerUserButtonClick }
-            data-testid="admin_manage__button-register"
           >
-            Cadastrar
+            CADASTRAR
           </button>
         </form>
       </div>

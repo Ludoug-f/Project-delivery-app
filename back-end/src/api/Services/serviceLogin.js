@@ -40,19 +40,19 @@ const Auth = require('./auth/authLogin');
     // const token = Auth.createToken(user);
     // console.log(token);
     // console.log(user);
-    const teste = await Auth.validateToken(authorization);
-    console.log(teste);
+    const teste = await Auth.TokenDecoder(authorization);
     try {
-      const userAdm = await User.findOne({ where: { email: teste } });
+      const userAdm = await User.findOne({ where: { id: teste } });
       // console.log(userAdm);
       if (userAdm.role !== 'administrator' || !authorization) {
         return { message: 'Unauthorized' };
       }
+      const passEncryp = md5(user.password);
       const createUser = await User.create({ name: user.name,
-        email: user.email, 
+        email: user.email,
         role: user.role,
-        password: user.password });
-      return { type: 201, message: createUser }; 
+        password: passEncryp });
+      return { message: createUser }; 
     } catch (error) {
       console.log(error);
     }
