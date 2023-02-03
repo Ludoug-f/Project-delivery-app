@@ -13,6 +13,8 @@ export default function Login() {
 
   useEffect(() => {
     if (history.location.pathname === '/') history.push('/login'); // Verify if the user is logged in
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user) history.push('/customer/products');
   }, []);
 
   useEffect(() => { // Verify if the button should be disabled or not

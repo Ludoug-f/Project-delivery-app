@@ -16,11 +16,9 @@ app.use(express.json());
 app.use(cors());
 
 app.get('/coffee', (_req, res) => res.status(418).end());
-// app.use(routerSales);
 app.use('/images', express.static(path.join(__dirname, '..', '..', 'public')));
 app.use('/login', route.routerLogin);
-// app.use('/regiser', route.routerUser);
-// app.use(routeUser);
+
 app.use(admin);
 app.use('/register', route.routerRegister);
 app.use('/sales', route.routerSales);
