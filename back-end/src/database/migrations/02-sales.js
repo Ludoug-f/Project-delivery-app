@@ -1,3 +1,5 @@
+// src/migrations/[timestamp]-create-user.js
+
 'use strict';
 
 module.exports = {

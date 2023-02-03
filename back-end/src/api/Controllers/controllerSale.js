@@ -1,42 +1,50 @@
 const SaleService = require('../Services/serviceSales');
 
-const Newsale = async (req, res) => {
+// New Sale
+const NewSale = async (req, res) => {
   const id = await SaleService.newSale(req.body);
 
   res.status(201).json({ id });
 };
 
-const getAllSales = async (req, res) => {
-  const sales = await SaleService.getAllSales();
+// Get Order by Seller
+const getOrdersSELLER = async (req, res) => {
+  const sales = await SaleService.getSellerSales(req.headers.authorization);
 
   res.status(200).json(sales);
 };
 
-const getSaleById = async (req, res) => {
-  const { id } = req.params;
-  const sale = await SaleService.getSaleById(id);
+// Get Order by Customer
+const getOrdersCUSTOMER = async (req, res) => {
+  const { email } = req.params;
+  if (!email || email === 'undefined') {
+    return res.status(400).json({ message: 'Email not sent' });
+  }
+  
+  const response = await SaleService.getSalesCustomer(email);
+  res.status(200).json(response);
+}; 
+
+// Get Sale Products
+const getSaleProducts = async (req, res) => {
+  const sale = await SaleService.getSaleProducts(req.params.saleId);
 
   res.status(200).json(sale);
 };
 
-const updateSale = async (req, res) => {
-  const { id } = req.params;
-  const sale = await SaleService.updateSale(id, req.body);
+// Update Sale
+const updateSales = async (req, res) => {
+  const affectedRows = await SaleService.updateSale(req.body);
 
-  res.status(200).json(sale);
-};
+  if (affectedRows) return res.status(200).json({ affectedRows });
 
-const deleteSale = async (req, res) => {
-  const { id } = req.params;
-  const sale = await SaleService.deleteSale(id);
-
-  res.status(200).json(sale);
+  return res.status(404).json({ message: 'Sale not found' });
 };
 
 module.exports = {
-    Newsale,
-    getAllSales,
-    getSaleById,
-    updateSale,
-    deleteSale,
-};
+  NewSale,
+  getOrdersSELLER,
+  getOrdersCUSTOMER,
+  getSaleProducts,
+  updateSales,
+ };
