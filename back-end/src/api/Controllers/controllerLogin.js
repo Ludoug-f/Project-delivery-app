@@ -20,7 +20,7 @@ const Auth = require('../Services/auth/authLogin');
     const newUser = await serviceLogin.admToken({ name, email, role, password }, authorization);
   
     if (existingEmail) {
-      return res.status(409).json({ message: 'Eamil already exists' });
+      return res.status(409).json({ message: 'Email already exists' });
     }  
 
     if (existingName) {

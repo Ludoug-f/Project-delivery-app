@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import NavBar from '../components/Navbar';
+// import API from '../utils/API';
 
 function Admin() {
   const [userName, setUserName] = useState('');
@@ -53,30 +55,10 @@ function Admin() {
   // }
   // };
 
-  const removeUsers = (index) => {
-    const updatedUsers = userList.filter((e, i) => i !== index);
-    setUserList([...updatedUsers]);
-  };
-
   return (
     <div>
       <header>
-        <title
-          data-testid="customer_products__element-navbar-link-orders"
-        >
-          Gerenciar Usuários
-        </title>
-        <h1
-          data-testid="customer_products__element-navbar-user-full-name"
-        >
-          Tryber Admin
-        </h1>
-        <button
-          type="button"
-          data-testid="customer_products__element-navbar-link-logout"
-        >
-          Sair
-        </button>
+        <NavBar />
       </header>
       <div>
         {error
@@ -157,7 +139,6 @@ function Admin() {
             <button
               type="button"
               data-testid={ `admin_manage__element-user-table-remove-${index}` }
-              onClick={ () => removeUsers(index) }
             >
               Excluir
             </button>
