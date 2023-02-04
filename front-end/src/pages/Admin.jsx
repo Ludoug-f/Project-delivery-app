@@ -25,40 +25,32 @@ function Admin() {
     }
   }, [userEmail, userPassword, userName]);
 
+  const adm = window.localStorage.getItem('user');
+
+  const tokenAdm = (token) => {
+    axios.defaults.headers.common.Authorization = token;
+  };
+
+  useEffect(() => {
+    tokenAdm();
+  });
+
   const { register, handleSubmit } = useForm();
 
-  const onClickSubmit = async (data) => {
-    console.log(data);
+  const onClickSubmit = async () => {
     try {
       await axios.post('http://localhost:3001/admin/manage', {
-        userName,
-        userEmail,
-        userPassword,
-        userRole,
+        name: userName,
+        email: userEmail,
+        role: userRole,
+        password: userPassword,
       });
       setError(false);
-      console.log(userList, userRole, userEmail);
+      console.log('deu certo');
     } catch (err) {
       setError(true);
     }
   };
-
-  // const onClickSubmit = async () => {
-  //   try {
-  //     await axios.post('http://localhost:3001/admin/manage', {
-  //       userName,
-  //       userEmail,
-  //       userPassword,
-  //       userRole,
-  //     });
-  //     getUserList();
-  //     setError(false);
-  //     console.log(userList);
-  //   } catch (err) {
-  //     console.log(err);
-  //     setError(true);
-  //   }
-  // };
 
   return (
     <div>
