@@ -25,17 +25,18 @@ function Admin() {
     }
   }, [userEmail, userPassword, userName]);
 
-  const adm = window.localStorage.getItem('user');
+  const { register, handleSubmit } = useForm();
 
-  const tokenAdm = (token) => {
+  const tokenAdm = () => {
+    const local = window.localStorage.getItem('user');
+    const user = JSON.parse(local);
+    const { token } = user;
     axios.defaults.headers.common.Authorization = token;
   };
 
   useEffect(() => {
     tokenAdm();
-  });
-
-  const { register, handleSubmit } = useForm();
+  }, []);
 
   const onClickSubmit = async () => {
     try {
@@ -46,7 +47,6 @@ function Admin() {
         password: userPassword,
       });
       setError(false);
-      console.log('deu certo');
     } catch (err) {
       setError(true);
     }
