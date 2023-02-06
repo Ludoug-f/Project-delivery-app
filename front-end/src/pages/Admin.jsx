@@ -11,6 +11,7 @@ function Admin() {
   const [registerButton, setRegisterButton] = useState('');
   const [error, setError] = useState(false);
 
+  const STATUS = 201;
   useEffect(() => {
     const SIX = 6;
     const TWELVE = 12;
@@ -40,13 +41,15 @@ function Admin() {
 
   const onClickSubmit = async () => {
     try {
-      await axios.post('http://localhost:3001/admin/manage', {
+      const response = await axios.post('http://localhost:3001/admin/manage', {
         name: userName,
         email: userEmail,
         role: userRole,
         password: userPassword,
       });
+      const { status } = response;
       setError(false);
+      console.log(status);
     } catch (err) {
       setError(true);
     }
