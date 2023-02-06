@@ -5,6 +5,7 @@ import NavBar from '../components/Navbar';
 
 function Admin() {
   const [userName, setUserName] = useState('');
+  const [userDivName, setUserDivName] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const [userRole, setUserRole] = useState('seller');
@@ -50,6 +51,7 @@ function Admin() {
       const { status } = response;
       setError(false);
       setSuccess(true);
+      setUserDivName(userName);
       console.log(status);
     } catch (err) {
       setError(true);
@@ -127,7 +129,8 @@ function Admin() {
       </div>
       <div>
         {success
-        && <h3>Registrado com sucesso</h3>}
+        // && <h3>usuário registrado com sucesso</h3>}
+        && <h3>{`Usuário ${userDivName} registrado com sucesso` }</h3>}
         {error
         && <h3 data-testid="admin_manage__element-invalid-register">Erro no registro</h3>}
         {/* { userList.map((e, index) => (
