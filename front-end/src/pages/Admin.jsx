@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import axios from 'axios';
+import NavBar from '../components/Navbar';
 
 function Admin() {
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
-  const [userRole, setUserRole] = useState('vendedor');
+  const [userRole, setUserRole] = useState('seller');
   const [registerButton, setRegisterButton] = useState('');
-  const [userList, setUserList] = useState([]);
   const [error, setError] = useState(false);
 
   useEffect(() => {
@@ -23,116 +25,108 @@ function Admin() {
     }
   }, [userEmail, userPassword, userName]);
 
-  const registerUserButtonClick = (e) => {
-    e.preventDefault();
-    const newUser = {
-      userName,
-      userEmail,
-      userPassword,
-      userRole,
-    };
-    setUserList([...userList, newUser]);
-    setUserName('');
-    setUserEmail('');
-    setUserPassword('');
-    setUserRole('vendedor');
-    setRegisterButton('');
-    setError(false);
-  };
+  const { register, handleSubmit } = useForm();
 
-  // const registerUserButtonClick = async (data) => {
-  // const registerVerify = await API
-  //   .fetchBody('/register', 'POST', { ...data });
-  // if (registerVerify.message === 'Data already exists') {
-  //   setError(true);
-  // } else {
-  // setUserList([...userList, data]);
-  // localStorage.setItem('user', JSON.stringify(data));
-  // const login = await API.fetchBody('/login', 'POST', data);
-  // if (login.role === 'customer') history.push('/customer/products');
-  // }
-  // };
+  useEffect(() => {
+    const local = window.localStorage.getItem('user');
+    const user = JSON.parse(local);
+    const { token } = user;
+    axios.defaults.headers.common.Authorization = token;
+  }, []);
 
-  const removeUsers = (index) => {
-    const updatedUsers = userList.filter((e, i) => i !== index);
-    setUserList([...updatedUsers]);
+  // useEffect(() => {
+  //   tokenAdm();
+  // }, []);
+
+  const onClickSubmit = async () => {
+    try {
+      const response = await axios.post('http://localhost:3001/admin/manage', {
+        name: userName,
+        email: userEmail,
+        role: userRole,
+        password: userPassword,
+      });
+      const { status } = response;
+      setError(false);
+      console.log(status);
+    } catch (err) {
+      setError(true);
+    }
   };
 
   return (
     <div>
       <header>
-        <title
-          data-testid="customer_products__element-navbar-link-orders"
-        >
-          Gerenciar Usuários
-        </title>
-        <h1
-          data-testid="customer_products__element-navbar-user-full-name"
-        >
-          Tryber Admin
-        </h1>
-        <button
-          type="button"
-          data-testid="customer_products__element-navbar-link-logout"
-        >
-          Sair
-        </button>
+        <NavBar />
       </header>
       <div>
         {error
         && <p data-testid="admin_manage__element-invalid-register">Erro no registro</p>}
         <h2>Cadastrar novos usuários</h2>
-        <form>
+        <form className="register" onSubmit={ handleSubmit(onClickSubmit) }>
           <input
-            onChange={ ({ target }) => { setUserName(target.value); } }
-            placeholder="Nome e sobrenome"
-            type="text"
-            id="name"
             data-testid="admin_manage__input-name"
+            type="text"
+            placeholder="Nome e sobrenome"
+            id="name"
+            { ...register('name', { min: 12 }) }
+            onChange={ ({ target }) => {
+              setUserName(target.value);
+            } }
           />
+
           <input
-            onChange={ ({ target }) => { setUserEmail(target.value); } }
-            id="email"
-            placeholder="seu-email@site.com.br"
-            type="email"
             data-testid="admin_manage__input-email"
+            type="email"
+            placeholder="seu-email@site.com.br"
+            id="email"
+            { ...register('email') }
+            onChange={ ({ target }) => {
+              setUserEmail(target.value);
+            } }
           />
+
           <input
-            onChange={ ({ target }) => { setUserPassword(target.value); } }
-            placeholder="************"
-            type="password"
             data-testid="admin_manage__input-password"
+            type="password"
+            placeholder="************"
+            id="password"
+            { ...register('password', { min: 6 }) }
+            onChange={ ({ target }) => {
+              setUserPassword(target.value);
+            } }
           />
+
           <select
-            onChange={ ({ target }) => { setUserRole(target.value); } }
-            value={ userRole }
+            { ...register('role') }
+            onChange={ ({ target }) => {
+              setUserRole(target.value);
+            } }
             data-testid="admin_manage__select-role"
           >
             <option
-              value="vendedor"
+              value="seller"
             >
-              vendedor
+              Vendedor
             </option>
             <option
-              value="usuário"
+              value="customer"
             >
-              usuário
+              Usuário
             </option>
           </select>
           <button
+            data-testid="admin_manage__button-register"
             type="submit"
             disabled={ registerButton }
-            onClick={ registerUserButtonClick }
-            data-testid="admin_manage__button-register"
           >
-            Cadastrar
+            CADASTRAR
           </button>
         </form>
       </div>
       <div>
-        Quadro de lista de usuários
         <h1>Quadro de usuários</h1>
-        { userList.map((e, index) => (
+        {/* { userList.map((e, index) => (
           <div key={ index }>
             <p
               data-testid={ `admin_manage__element-user-table-item-number-${index}` }
@@ -157,12 +151,11 @@ function Admin() {
             <button
               type="button"
               data-testid={ `admin_manage__element-user-table-remove-${index}` }
-              onClick={ () => removeUsers(index) }
             >
               Excluir
             </button>
           </div>
-        ))}
+        ))} */}
       </div>
     </div>
   );

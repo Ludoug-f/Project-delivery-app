@@ -23,7 +23,8 @@ const JWTPASS = process.env.NODE_ENV || 'JWTPASS';
       const decoded = jwt.verify(token, secret);
       return decoded;
     } catch (error) {
-      return undefined;
+      console.log('erro no token');
+      return error;
     }
   };
   
