@@ -7,7 +7,7 @@ function Admin() {
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
-  const [userRole, setUserRole] = useState('vendedor');
+  const [userRole, setUserRole] = useState('seller');
   const [registerButton, setRegisterButton] = useState('');
   const [error, setError] = useState(false);
 
@@ -27,16 +27,16 @@ function Admin() {
 
   const { register, handleSubmit } = useForm();
 
-  const tokenAdm = () => {
+  useEffect(() => {
     const local = window.localStorage.getItem('user');
     const user = JSON.parse(local);
     const { token } = user;
     axios.defaults.headers.common.Authorization = token;
-  };
-
-  useEffect(() => {
-    tokenAdm();
   }, []);
+
+  // useEffect(() => {
+  //   tokenAdm();
+  // }, []);
 
   const onClickSubmit = async () => {
     try {

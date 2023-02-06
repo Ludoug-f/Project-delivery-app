@@ -36,28 +36,7 @@ const Auth = require('./auth/authLogin');
     }
   } */
 
-  const admToken = async (user, authorization) => {
-    // const token = Auth.createToken(user);
-    // console.log(token);
-    // console.log(user);
-    const token = await Auth.TokenDecoder(authorization);
-    try {
-      const userAdm = await User.findOne({ where: { id: token } });
-      console.log(userAdm.role);
-      if (userAdm.role !== 'administrator' || !authorization) {
-        return { message: 'Unauthorized' };
-      }
-      const passEncryp = md5(user.password);
-      const createUser = await User.create({
-        name: user.name,
-        email: user.email,
-        role: user.role,
-        password: passEncryp });
-      return { message: createUser }; 
-    } catch (error) {
-      console.log(error);
-    }
-  };
+
 
   const newUser = async (user) => {
     const { name, email, role } = user;
@@ -89,6 +68,39 @@ const Auth = require('./auth/authLogin');
     const user = await User.findOne({ where: { name } });
   
     return user;
+  };
+
+  const admToken = async (user, authorization) => {
+    // const token = Auth.createToken(user);
+    // console.log(token);
+    // console.log(user);
+    const token = await Auth.TokenDecoder(authorization);
+    try {
+      const userAdm = await User.findOne({ where: { id: token } });
+      const existingEmail = await findByEmail(user.email);
+      const existingName = await findByName(user.name);
+
+      if (userAdm.role !== 'administrator' || !authorization) {
+        return { message: 'Unauthorized' };
+      }
+
+      if (existingEmail) {
+        return res.status(409).json({ message: 'Email already exists' });
+      }  
+  
+      if (existingName) {
+        return res.status(409).json({ message: 'Name already exists' });
+      }
+      const passEncryp = md5(user.password);
+      const createUser = await User.create({
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        password: passEncryp });
+      return { message: createUser }; 
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   module.exports = { login, newUser, findByEmail, findByName, admToken };

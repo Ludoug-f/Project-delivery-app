@@ -14,18 +14,18 @@ const Auth = require('../Services/auth/authLogin');
     const { authorization } = req.headers;
     const { name, email, role, password } = req.body;
 
-    const existingEmail = await serviceLogin.findByEmail(email);
-    const existingName = await serviceLogin.findByName(name);
+    // const existingEmail = await serviceLogin.findByEmail(email);
+    // const existingName = await serviceLogin.findByName(name);
 
     const newUser = await serviceLogin.admToken({ name, email, role, password }, authorization);
   
-    if (existingEmail) {
-      return res.status(409).json({ message: 'Email already exists' });
-    }  
+    // if (existingEmail) {
+    //   return res.status(409).json({ message: 'Email already exists' });
+    // }  
 
-    if (existingName) {
-      return res.status(409).json({ message: 'Name already exists' });
-    }
+    // if (existingName) {
+    //   return res.status(409).json({ message: 'Name already exists' });
+    // }
   
     if (newUser) {
       return res.status(201).json(newUser);
