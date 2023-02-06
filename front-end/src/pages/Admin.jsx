@@ -10,6 +10,7 @@ function Admin() {
   const [userRole, setUserRole] = useState('seller');
   const [registerButton, setRegisterButton] = useState('');
   const [error, setError] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   useEffect(() => {
     const SIX = 6;
@@ -48,9 +49,11 @@ function Admin() {
       });
       const { status } = response;
       setError(false);
+      setSuccess(true);
       console.log(status);
     } catch (err) {
       setError(true);
+      setSuccess(false);
     }
   };
 
@@ -60,8 +63,6 @@ function Admin() {
         <NavBar />
       </header>
       <div>
-        {error
-        && <p data-testid="admin_manage__element-invalid-register">Erro no registro</p>}
         <h2>Cadastrar novos usuários</h2>
         <form className="register" onSubmit={ handleSubmit(onClickSubmit) }>
           <input
@@ -125,7 +126,10 @@ function Admin() {
         </form>
       </div>
       <div>
-        <h1>Quadro de usuários</h1>
+        {success
+        && <h3>Registrado com sucesso</h3>}
+        {error
+        && <h3 data-testid="admin_manage__element-invalid-register">Erro no registro</h3>}
         {/* { userList.map((e, index) => (
           <div key={ index }>
             <p
