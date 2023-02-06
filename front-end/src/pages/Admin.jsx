@@ -105,7 +105,7 @@ function Admin() {
             data-testid="admin_manage__select-role"
           >
             <option
-              value="seeler"
+              value="seller"
             >
               Vendedor
             </option>
