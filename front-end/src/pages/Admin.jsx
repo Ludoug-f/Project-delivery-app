@@ -11,7 +11,6 @@ function Admin() {
   const [registerButton, setRegisterButton] = useState('');
   const [error, setError] = useState(false);
 
-  const STATUS = 201;
   useEffect(() => {
     const SIX = 6;
     const TWELVE = 12;
