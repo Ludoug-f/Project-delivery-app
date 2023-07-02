@@ -69,6 +69,9 @@ Para que o banco de dados funcione é necessário configurar as variáveis de am
 
 Se tudo ocorreu bem, agora estará rodando nosso app!
 
+### *⚠️ O Projeto ainda nao foi totalmente finalizado*
+<br>
+
 ## *Contato*
 
 * Luciano Freitas - [Linkedin](https://www.linkedin.com/in/luciano-f/) - [GitHub](https://github.com/Ludoug-f)
