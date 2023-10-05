@@ -1,4 +1,4 @@
-# Project Delivery App
+# Project GARÇO.NET
 
 ## *Sobre o Projeto*
 Nessa aplicação, meu grupo foi responsável por criar e integrar tanto o back-end quanto o front-end, criando uma plataforma de delivery de cerveja. 🍻
